@@ -88,24 +88,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmo-TG-6WC">
-                                <rect key="frame" x="0.0" y="30" width="375" height="44"/>
-                                <items/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="uBD-of-6if"/>
+                                    <barButtonItem style="plain" id="Q4O-9d-Tpj">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DKW-g4-GbK">
+                                            <rect key="frame" x="283" y="3" width="76" height="38"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <state key="normal" title="Settings"/>
+                                            <connections>
+                                                <action selector="btnSettingsPressed:" destination="yrn-aa-S8X" eventType="touchUpInside" id="PlE-lA-Sfy"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iQuiz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k60-D2-cGI">
-                                <rect key="frame" x="168" y="42" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iQuiz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k60-D2-cGI">
+                                <rect key="frame" x="166" y="30.5" width="44.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnS-DL-w0D">
-                                <rect key="frame" x="302" y="37" width="57" height="30"/>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <action selector="btnSettingsPressed:" destination="yrn-aa-S8X" eventType="touchUpInside" id="VoB-A9-1NP"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGO-gh-NwU">
-                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <segue destination="X6k-Td-JOS" kind="embed" id="Qlu-m5-8zm"/>
                                 </connections>
@@ -114,12 +120,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tWy-GV-Msn" firstAttribute="trailing" secondItem="dGO-gh-NwU" secondAttribute="trailing" id="1zI-MW-Agw"/>
-                            <constraint firstItem="Pmo-TG-6WC" firstAttribute="top" secondItem="Y3e-fm-nvt" secondAttribute="top" constant="30" id="4rG-iq-l4K"/>
-                            <constraint firstItem="tWy-GV-Msn" firstAttribute="trailing" secondItem="WnS-DL-w0D" secondAttribute="trailing" constant="16" id="FmB-76-Y3x"/>
                             <constraint firstItem="dGO-gh-NwU" firstAttribute="top" secondItem="Pmo-TG-6WC" secondAttribute="bottom" id="J71-6X-8Wd"/>
                             <constraint firstItem="Pmo-TG-6WC" firstAttribute="leading" secondItem="tWy-GV-Msn" secondAttribute="leading" id="OHP-ui-c5n"/>
-                            <constraint firstItem="WnS-DL-w0D" firstAttribute="centerY" secondItem="k60-D2-cGI" secondAttribute="centerY" id="eud-4N-9o6"/>
                             <constraint firstItem="tWy-GV-Msn" firstAttribute="bottom" secondItem="dGO-gh-NwU" secondAttribute="bottom" id="fH6-F6-Vqg"/>
+                            <constraint firstItem="Pmo-TG-6WC" firstAttribute="top" secondItem="tWy-GV-Msn" secondAttribute="top" id="iIp-SV-LMZ"/>
                             <constraint firstItem="k60-D2-cGI" firstAttribute="centerX" secondItem="Pmo-TG-6WC" secondAttribute="centerX" id="qAi-7d-b75"/>
                             <constraint firstItem="dGO-gh-NwU" firstAttribute="leading" secondItem="tWy-GV-Msn" secondAttribute="leading" id="sY8-Vz-WxJ"/>
                             <constraint firstItem="k60-D2-cGI" firstAttribute="centerY" secondItem="Pmo-TG-6WC" secondAttribute="centerY" id="tee-W3-oJt"/>
