@@ -41,7 +41,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="1uT-Nc-hvG">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="1uT-Nc-hvG">
                                             <rect key="frame" x="122" y="37" width="238" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -49,6 +49,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="jsI-pU-lNv" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1uT-Nc-hvG" secondAttribute="bottom" id="IlY-KS-E9Y"/>
                                         <constraint firstAttribute="bottom" secondItem="jsI-pU-lNv" secondAttribute="bottom" constant="8" id="Irn-TP-fcW"/>
                                         <constraint firstItem="Er2-oi-3iI" firstAttribute="leading" secondItem="jsI-pU-lNv" secondAttribute="trailing" constant="12" id="Nhn-oN-wh6"/>
                                         <constraint firstAttribute="trailing" secondItem="Er2-oi-3iI" secondAttribute="trailing" constant="15" id="RF7-od-Ayc"/>
@@ -93,7 +94,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uBD-of-6if"/>
                                     <barButtonItem style="plain" id="Q4O-9d-Tpj">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DKW-g4-GbK">
-                                            <rect key="frame" x="283" y="3" width="76" height="38"/>
+                                            <rect key="frame" x="287" y="4" width="72" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Settings"/>
