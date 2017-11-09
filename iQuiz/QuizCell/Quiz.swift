@@ -21,6 +21,5 @@ class Quiz {
         self.photo = photo
         self.desc = desc
     }
-    
 }
 
