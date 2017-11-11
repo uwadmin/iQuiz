@@ -45,7 +45,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "QuizCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? QuizCell else {
-            fatalError("The dequeued cell is not an instance of QuizCell.")
+            fatalError("The de-queued cell is not an instance of QuizCell.")
         }
 
         cell.titleLabel.adjustsFontSizeToFitWidth = true
@@ -64,15 +64,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.presentL(qvc!)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let indexPath = tableView.indexPathForSelectedRow {
-//            let rowNum = indexPath.row
-//            let destVC = segue.destination as! QuestionVC
-//            destVC.index = rowNum
-//        }
-//    }
-
-    override func viewDidLoad() {
+   override func viewDidLoad() {
         super.viewDidLoad()
         loadQuizzes()
         tableView.dataSource = self

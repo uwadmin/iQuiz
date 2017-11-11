@@ -107,7 +107,7 @@ class QuestionVC: UIViewController {
     let p = [1, 2, 3, 4].shuffled()
     
     let qDict: [[[String]]] = [
-        [["test a very very long line of the question, test a very very long line of the questiontest a very very long line of the question", "test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "A2", "A3", "A4"], ["SQ2", "A1", "A2", "A3", "A4"], ["SQ3", "A1", "A2", "A3", "A4"]],
+        [["test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "A2", "A3", "A4"], ["SQ2", "A1", "A2", "A3", "A4"], ["SQ3", "A1", "A2", "A3", "A4"]],
         [["MQ1", "A1", "A2", "A3", "A4"], ["MQ2", "A1", "A2", "A3", "A4"], ["MQ3", "A1", "A2", "A3", "A4"]],
         [["HQ1", "A1", "A2", "A3", "A4"], ["HQ2", "A1", "A2", "A3", "A4"], ["HQ3", "A1", "A2", "A3", "A4"]]
     ]
