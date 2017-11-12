@@ -20,12 +20,12 @@ class AnswerVC: UIViewController {
     var correctNum: Int = 0
 
 
-    @IBAction func backBtnPressed(_ sender: UIButton) {
+    @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         self.presentR(mvc!)
     }
 
-    @IBAction func nextBtnPressed(_ sender: Any) {
+    @IBAction func goToNext(_ sender: Any) {
         let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
         qvc?.index = self.index
         qvc?.qNum = self.qNum + 1

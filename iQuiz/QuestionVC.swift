@@ -30,12 +30,12 @@ class QuestionVC: UIViewController {
     var selectedAns:String = ""
     
     
-    @IBAction func backBtnPressed(_ sender: UIButton) {
+    @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         self.presentR(mvc!)
     }
     
-    @IBAction func nextBtnPressed(_ sender: UIButton) {
+    @IBAction func goToNext(_ sender: Any) {
         if (qNum == qDict[index].count - 1) {
             let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
             fvc?.correctNum = self.correctNum
@@ -59,10 +59,6 @@ class QuestionVC: UIViewController {
     }
     
     @IBAction func redoPressed(_ sender: UIButton) {
-        selected = false
-        for item in answerBtns! {
-            item.isSelected = false
-        }
         submited = false
         redoBtn.isEnabled = false
         submitBtn.isEnabled = true

@@ -7,9 +7,15 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueExtras.ttc">
+            <string>HelveticaNeue-CondensedBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--MainVC-->
         <scene sceneID="Ol7-SD-maj">
@@ -144,7 +150,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Back"/>
                                             <connections>
-                                                <action selector="backBtnPressed:" destination="QH3-N5-SBy" eventType="touchUpInside" id="kRk-vL-9pM"/>
+                                                <action selector="exitToMain:" destination="QH3-N5-SBy" eventType="touchUpInside" id="kRk-vL-9pM"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -156,7 +162,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Next"/>
                                             <connections>
-                                                <action selector="nextBtnPressed:" destination="QH3-N5-SBy" eventType="touchUpInside" id="gQt-bI-VRP"/>
+                                                <action selector="goToNext:" destination="QH3-N5-SBy" eventType="touchUpInside" id="gQt-bI-VRP"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -186,6 +192,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9pd-zt-zuk" firstAttribute="top" secondItem="rf5-hN-Ubw" secondAttribute="bottom" constant="10" id="8Tp-bX-skJ"/>
                             <constraint firstItem="rf5-hN-Ubw" firstAttribute="top" secondItem="zFt-ng-VJC" secondAttribute="bottom" constant="10" id="Co4-2Q-DPy"/>
@@ -204,6 +211,10 @@
                             <constraint firstItem="OHu-At-Ga5" firstAttribute="trailing" secondItem="9pd-zt-zuk" secondAttribute="trailing" constant="16" id="uIF-e0-YoV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OHu-At-Ga5"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yor-aE-QFV" appends="YES" id="ZvH-q9-40r"/>
+                            <outletCollection property="gestureRecognizers" destination="0tT-9V-uyW" appends="YES" id="tQi-fC-psh"/>
+                        </connections>
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -213,6 +224,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGQ-Ks-ekw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="left" id="yor-aE-QFV">
+                    <connections>
+                        <action selector="goToNext:" destination="QH3-N5-SBy" id="8KR-DK-5vW"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="0tT-9V-uyW">
+                    <connections>
+                        <action selector="exitToMain:" destination="QH3-N5-SBy" id="ZhT-66-ejx"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="783" y="140"/>
         </scene>
@@ -234,7 +255,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Back"/>
                                             <connections>
-                                                <action selector="backBtnPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="Yg1-gA-44K"/>
+                                                <action selector="exitToMain:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="Yg1-gA-44K"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -246,67 +267,87 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Next"/>
                                             <connections>
-                                                <action selector="nextBtnPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="msL-Yr-QDr"/>
+                                                <action selector="goToNext:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="msL-Yr-QDr"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlaceHolder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CR-hK-V95">
-                                <rect key="frame" x="134" y="30.5" width="107" height="24"/>
+                                <rect key="frame" x="134.5" y="30" width="106.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Lt-8pA">
-                                <rect key="frame" x="26" y="414" width="323" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="A">
-                                    <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                </state>
-                                <connections>
-                                    <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="mII-0R-D3w"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gux-au-4Rq">
-                                <rect key="frame" x="26" y="466" width="323" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="B">
-                                    <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                </state>
-                                <connections>
-                                    <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="nGk-c0-fLs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9Q-UO-4Yu">
-                                <rect key="frame" x="26" y="518" width="323" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="C">
-                                    <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                </state>
-                                <connections>
-                                    <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="0Z9-g6-ZG5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-eh-FhM">
-                                <rect key="frame" x="26" y="570" width="323" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="D">
-                                    <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                </state>
-                                <connections>
-                                    <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="22c-Gc-EJf"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Sd-Pb-uhY">
+                                <rect key="frame" x="37.5" y="381" width="300" height="226"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Lt-8pA">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
+                                        <state key="normal" title="A">
+                                            <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="mII-0R-D3w"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gux-au-4Rq">
+                                        <rect key="frame" x="0.0" y="59" width="300" height="49"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
+                                        <state key="normal" title="B">
+                                            <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="nGk-c0-fLs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9Q-UO-4Yu">
+                                        <rect key="frame" x="0.0" y="118" width="300" height="49"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
+                                        <state key="normal" title="C">
+                                            <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="0Z9-g6-ZG5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-eh-FhM">
+                                        <rect key="frame" x="0.0" y="177" width="300" height="49"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
+                                        <state key="normal" title="D">
+                                            <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="answerPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="22c-Gc-EJf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74B-IM-ef4">
                                 <rect key="frame" x="301" y="622" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1F3-Am-teE"/>
+                                </constraints>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="M1d-CR-XT6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mZ-VG-XY6">
-                                <rect key="frame" x="25" y="622" width="36" height="30"/>
+                                <rect key="frame" x="25" y="622" width="49" height="30"/>
                                 <state key="normal" title="Redo"/>
                                 <connections>
                                     <action selector="redoPressed:" destination="A4i-QE-1Nu" eventType="touchUpInside" id="v7g-Ta-aZL"/>
@@ -323,35 +364,41 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="jkc-lU-A1j" firstAttribute="trailing" secondItem="74B-IM-ef4" secondAttribute="trailing" constant="25" id="111-B8-XCL"/>
-                            <constraint firstItem="rzM-eh-FhM" firstAttribute="trailing" secondItem="rUE-Lt-8pA" secondAttribute="trailing" id="2Ev-3q-lzG"/>
+                            <constraint firstItem="74B-IM-ef4" firstAttribute="trailing" secondItem="jkc-lU-A1j" secondAttribute="trailing" constant="-25" id="111-B8-XCL"/>
                             <constraint firstItem="8CR-hK-V95" firstAttribute="centerY" secondItem="WyI-ZG-KJU" secondAttribute="centerY" id="2TZ-JQ-qrQ"/>
                             <constraint firstItem="WyI-ZG-KJU" firstAttribute="trailing" secondItem="jkc-lU-A1j" secondAttribute="trailing" id="7Wu-lW-XsM"/>
-                            <constraint firstItem="R9Q-UO-4Yu" firstAttribute="top" secondItem="Gux-au-4Rq" secondAttribute="bottom" constant="10" id="ANk-dO-jb0"/>
                             <constraint firstItem="WyI-ZG-KJU" firstAttribute="leading" secondItem="jkc-lU-A1j" secondAttribute="leading" id="FcG-eG-Xhg"/>
                             <constraint firstItem="WyI-ZG-KJU" firstAttribute="top" secondItem="jkc-lU-A1j" secondAttribute="top" id="Ijr-uB-a8o"/>
-                            <constraint firstItem="rzM-eh-FhM" firstAttribute="top" secondItem="R9Q-UO-4Yu" secondAttribute="bottom" constant="10" id="Rgn-o7-Xb6"/>
-                            <constraint firstItem="rUE-Lt-8pA" firstAttribute="leading" secondItem="jkc-lU-A1j" secondAttribute="leading" constant="26" id="XIu-tb-b27"/>
+                            <constraint firstItem="8Sd-Pb-uhY" firstAttribute="width" secondItem="jkc-lU-A1j" secondAttribute="width" multiplier="0.8" id="Kld-XP-Kb6"/>
+                            <constraint firstItem="74B-IM-ef4" firstAttribute="top" secondItem="8Sd-Pb-uhY" secondAttribute="bottom" constant="15" id="SUg-go-zxp"/>
+                            <constraint firstItem="8Sd-Pb-uhY" firstAttribute="centerY" secondItem="jkc-lU-A1j" secondAttribute="centerY" priority="750" constant="20" id="SqW-y6-wU5"/>
+                            <constraint firstItem="NTl-ub-H5k" firstAttribute="trailing" secondItem="jkc-lU-A1j" secondAttribute="trailing" constant="-26" id="UZH-uu-x3a"/>
                             <constraint firstItem="7mZ-VG-XY6" firstAttribute="leading" secondItem="jkc-lU-A1j" secondAttribute="leading" constant="25" id="XkD-sr-3Lz"/>
-                            <constraint firstItem="rUE-Lt-8pA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NTl-ub-H5k" secondAttribute="bottom" constant="10" id="Xzb-Zr-VI4"/>
-                            <constraint firstItem="R9Q-UO-4Yu" firstAttribute="trailing" secondItem="rUE-Lt-8pA" secondAttribute="trailing" id="ZIT-sd-WoY"/>
-                            <constraint firstItem="jkc-lU-A1j" firstAttribute="bottom" secondItem="74B-IM-ef4" secondAttribute="bottom" constant="15" id="ZcS-k2-CiE"/>
+                            <constraint firstItem="74B-IM-ef4" firstAttribute="bottom" secondItem="jkc-lU-A1j" secondAttribute="bottom" constant="-15" id="ZcS-k2-CiE"/>
                             <constraint firstItem="8CR-hK-V95" firstAttribute="centerX" secondItem="WyI-ZG-KJU" secondAttribute="centerX" id="aWa-eT-SXO"/>
-                            <constraint firstItem="Gux-au-4Rq" firstAttribute="trailing" secondItem="rUE-Lt-8pA" secondAttribute="trailing" id="bOu-Wk-kUt"/>
-                            <constraint firstItem="jkc-lU-A1j" firstAttribute="trailing" secondItem="rUE-Lt-8pA" secondAttribute="trailing" constant="26" id="e6r-F9-sga"/>
-                            <constraint firstItem="rUE-Lt-8pA" firstAttribute="leading" secondItem="NTl-ub-H5k" secondAttribute="leading" id="eir-Ix-kGw"/>
+                            <constraint firstItem="7mZ-VG-XY6" firstAttribute="top" secondItem="8Sd-Pb-uhY" secondAttribute="bottom" constant="15" id="cin-cb-2c3"/>
                             <constraint firstItem="74B-IM-ef4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7mZ-VG-XY6" secondAttribute="trailing" id="ffa-sw-W9i"/>
-                            <constraint firstItem="74B-IM-ef4" firstAttribute="top" secondItem="rzM-eh-FhM" secondAttribute="bottom" constant="10" id="gDs-gx-OZx"/>
-                            <constraint firstItem="rUE-Lt-8pA" firstAttribute="trailing" secondItem="NTl-ub-H5k" secondAttribute="trailing" id="hBD-RI-jVT"/>
-                            <constraint firstItem="R9Q-UO-4Yu" firstAttribute="leading" secondItem="rUE-Lt-8pA" secondAttribute="leading" id="l2b-PZ-5CT"/>
-                            <constraint firstItem="Gux-au-4Rq" firstAttribute="top" secondItem="rUE-Lt-8pA" secondAttribute="bottom" constant="10" id="prH-bP-90S"/>
-                            <constraint firstItem="jkc-lU-A1j" firstAttribute="bottom" secondItem="7mZ-VG-XY6" secondAttribute="bottom" constant="15" id="r0a-aa-lyz"/>
-                            <constraint firstItem="Gux-au-4Rq" firstAttribute="leading" secondItem="rUE-Lt-8pA" secondAttribute="leading" id="rnW-0R-lkK"/>
-                            <constraint firstItem="rzM-eh-FhM" firstAttribute="leading" secondItem="rUE-Lt-8pA" secondAttribute="leading" id="w68-LV-OI7"/>
+                            <constraint firstItem="8Sd-Pb-uhY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NTl-ub-H5k" secondAttribute="bottom" constant="10" id="gks-ey-V3L"/>
+                            <constraint firstItem="8Sd-Pb-uhY" firstAttribute="height" secondItem="jkc-lU-A1j" secondAttribute="height" multiplier="0.35" id="igJ-CQ-JBR"/>
+                            <constraint firstItem="74B-IM-ef4" firstAttribute="height" secondItem="7mZ-VG-XY6" secondAttribute="height" id="k4Q-Py-Lbq"/>
+                            <constraint firstItem="7mZ-VG-XY6" firstAttribute="bottom" secondItem="jkc-lU-A1j" secondAttribute="bottom" constant="-15" id="r0a-aa-lyz"/>
+                            <constraint firstItem="NTl-ub-H5k" firstAttribute="leading" secondItem="jkc-lU-A1j" secondAttribute="leading" constant="26" id="rcq-Df-PTe"/>
+                            <constraint firstItem="74B-IM-ef4" firstAttribute="width" secondItem="7mZ-VG-XY6" secondAttribute="width" id="sf6-yZ-6zF"/>
+                            <constraint firstItem="8Sd-Pb-uhY" firstAttribute="centerX" secondItem="jkc-lU-A1j" secondAttribute="centerX" id="sjE-Kq-Xya"/>
                             <constraint firstItem="NTl-ub-H5k" firstAttribute="top" secondItem="WyI-ZG-KJU" secondAttribute="bottom" constant="15" id="zvG-cZ-b2e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jkc-lU-A1j"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Kld-XP-Kb6"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="JpS-Ru-b3u" appends="YES" id="PqD-Th-ez7"/>
+                            <outletCollection property="gestureRecognizers" destination="vPH-Tx-6rY" appends="YES" id="Uvc-yK-lfg"/>
+                        </connections>
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -363,19 +410,29 @@
                         <outlet property="redoBtn" destination="7mZ-VG-XY6" id="pnl-L0-XO6"/>
                         <outlet property="submitBtn" destination="74B-IM-ef4" id="drb-kc-JN9"/>
                         <outlet property="toolbarTitle" destination="8CR-hK-V95" id="KxK-9N-lbG"/>
-                        <outletCollection property="answerBtns" destination="rUE-Lt-8pA" collectionClass="NSMutableArray" id="KGU-z1-JRn"/>
-                        <outletCollection property="answerBtns" destination="Gux-au-4Rq" collectionClass="NSMutableArray" id="fJq-6u-rQu"/>
-                        <outletCollection property="answerBtns" destination="R9Q-UO-4Yu" collectionClass="NSMutableArray" id="lH0-fG-8Dr"/>
-                        <outletCollection property="answerBtns" destination="rzM-eh-FhM" collectionClass="NSMutableArray" id="SYU-az-VVD"/>
                         <outletCollection property="buttons" destination="7mZ-VG-XY6" collectionClass="NSMutableArray" id="Wp1-cs-SLj"/>
                         <outletCollection property="buttons" destination="74B-IM-ef4" collectionClass="NSMutableArray" id="eW1-9f-ceL"/>
+                        <outletCollection property="answerBtns" destination="rUE-Lt-8pA" collectionClass="NSMutableArray" id="KGU-z1-JRn"/>
                         <outletCollection property="buttons" destination="rUE-Lt-8pA" collectionClass="NSMutableArray" id="KUC-96-46I"/>
                         <outletCollection property="buttons" destination="Gux-au-4Rq" collectionClass="NSMutableArray" id="GzX-Rb-Vlk"/>
+                        <outletCollection property="answerBtns" destination="Gux-au-4Rq" collectionClass="NSMutableArray" id="fJq-6u-rQu"/>
+                        <outletCollection property="answerBtns" destination="R9Q-UO-4Yu" collectionClass="NSMutableArray" id="lH0-fG-8Dr"/>
                         <outletCollection property="buttons" destination="R9Q-UO-4Yu" collectionClass="NSMutableArray" id="86n-j9-OuL"/>
+                        <outletCollection property="answerBtns" destination="rzM-eh-FhM" collectionClass="NSMutableArray" id="SYU-az-VVD"/>
                         <outletCollection property="buttons" destination="rzM-eh-FhM" collectionClass="NSMutableArray" id="FyD-2V-KpZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKI-Xi-KCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="JpS-Ru-b3u">
+                    <connections>
+                        <action selector="exitToMain:" destination="A4i-QE-1Nu" id="eop-Te-id0"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="left" id="vPH-Tx-6rY">
+                    <connections>
+                        <action selector="goToNext:" destination="A4i-QE-1Nu" id="aMm-aj-ILc"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="96.5" y="826.5"/>
         </scene>
@@ -397,7 +454,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Back"/>
                                             <connections>
-                                                <action selector="backPressed:" destination="kjI-Ud-PQs" eventType="touchUpInside" id="eLj-RU-IKv"/>
+                                                <action selector="exitToMain:" destination="kjI-Ud-PQs" eventType="touchUpInside" id="eLj-RU-IKv"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -434,6 +491,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="BYX-XB-Obp" firstAttribute="centerY" secondItem="fzZ-cW-wbk" secondAttribute="centerY" id="2fF-QU-goE"/>
                             <constraint firstItem="CuI-ov-LJ3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bNB-zY-Nse" secondAttribute="bottom" constant="10" id="54Z-pJ-wOp"/>
@@ -451,6 +509,9 @@
                             <constraint firstItem="CuI-ov-LJ3" firstAttribute="trailing" secondItem="yxf-ed-39E" secondAttribute="trailing" constant="16" id="zx0-mJ-vfv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CuI-ov-LJ3"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="zia-06-nnI" appends="YES" id="UDD-49-cQ4"/>
+                        </connections>
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -460,6 +521,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gQ-Ar-boP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="right" id="zia-06-nnI">
+                    <connections>
+                        <action selector="exitToMain:" destination="kjI-Ud-PQs" id="2Wi-0n-I11"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="781.60000000000002" y="825.33733133433293"/>
         </scene>

@@ -16,7 +16,7 @@ class FinishedVC: UIViewController {
     var correctNum:Int = 0
     var totalNum:Int = 0
 
-    @IBAction func backPressed(_ sender: Any) {
+    @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         presentR(mvc!)
     }
