@@ -12,10 +12,12 @@ class AnswerVC: UIViewController {
     @IBOutlet weak var result: UILabel!
     @IBOutlet weak var indicator: UIImageView!
     @IBOutlet weak var answer: UILabel!
-
+    @IBOutlet weak var toolbarTitle: UILabel!
+    
     var index: Int = -1
-    var qNum: Int = -1
+    var qIndex: Int = -1
     var totalNum: Int = -1
+    var qRand: [Int] = []
     var correct: Bool = false
     var correctAns = ""
     var correctNum: Int = 0
@@ -27,7 +29,7 @@ class AnswerVC: UIViewController {
     }
 
     @IBAction func goToNext(_ sender: Any) {
-        if (qNum + 1 == totalNum) {
+        if (qIndex + 1 == totalNum) {
             let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
             fvc?.correctNum = self.correctNum
             fvc?.totalNum = self.totalNum
@@ -35,14 +37,16 @@ class AnswerVC: UIViewController {
         } else {
             let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
             qvc?.index = self.index
-            qvc?.qNum = self.qNum + 1
+            qvc?.qIndex = self.qIndex + 1
             qvc?.correctNum = self.correctNum
+            qvc?.qRand = self.qRand
             self.presentL(qvc!)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        toolbarTitle.text = toolbarTitle.text! + " (\(qIndex + 1)/\(totalNum))"
         answer.text = correctAns
         if (correct) {
             result.text = "You got it correct! It is:"

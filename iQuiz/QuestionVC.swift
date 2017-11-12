@@ -26,9 +26,17 @@ class QuestionVC: UIViewController {
     var correct: Bool = false
     var correctNum: Int = 0
     var index: Int = -1
-    var qNum:Int = 0
+    var qIndex:Int = 0
     var selectedAns:String = ""
     
+    let qDict: [[[String]]] = [
+        [["test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "A2", "A3", "A4"], ["SQ2", "A1", "A2", "A3", "A4"], ["SQ3", "A1", "A2", "A3", "A4"]],
+        [["MQ1", "A1", "A2", "A3", "A4"], ["MQ2", "A1", "A2", "A3", "A4"], ["MQ3", "A1", "A2", "A3", "A4"]],
+        [["HQ1", "A1", "A2", "A3", "A4"], ["HQ2", "A1", "A2", "A3", "A4"], ["HQ3", "A1", "A2", "A3", "A4"]]
+    ]
+    
+    var aRand: [Int] = [1, 2, 3, 4].shuffled()
+    var qRand: [Int] = []
     
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
@@ -41,11 +49,12 @@ class QuestionVC: UIViewController {
             selected = false
             let avc = storyboard?.instantiateViewController(withIdentifier: "avc") as? AnswerVC
             avc?.index = self.index
-            avc?.qNum = self.qNum
+            avc?.qIndex = self.qIndex
             avc?.totalNum = self.qDict[index].count
             avc?.correct = self.correct
-            avc?.correctAns = self.qDict[index][qNum][1]
+            avc?.correctAns = self.qDict[index][qRand[qIndex]][1]
             avc?.correctNum = self.correctNum
+            avc?.qRand = self.qRand
             self.presentL(avc!)
         } else {
             let alert = UIAlertController(title: "Please select an answer and submit first!", message: "", preferredStyle: .alert)
@@ -84,7 +93,7 @@ class QuestionVC: UIViewController {
             submited = true
             sender.isEnabled = false
             redoBtn.isEnabled = true
-            if (selectedAns == qDict[index][qNum][1]) {
+            if (selectedAns == qDict[index][qIndex][1]) {
                 correct = true
                 correctNum += 1
             }
@@ -95,19 +104,11 @@ class QuestionVC: UIViewController {
         }
     }
     
-    
-    let p = [1, 2, 3, 4].shuffled()
-    
-    let qDict: [[[String]]] = [
-        [["test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "A2", "A3", "A4"], ["SQ2", "A1", "A2", "A3", "A4"], ["SQ3", "A1", "A2", "A3", "A4"]],
-        [["MQ1", "A1", "A2", "A3", "A4"], ["MQ2", "A1", "A2", "A3", "A4"], ["MQ3", "A1", "A2", "A3", "A4"]],
-        [["HQ1", "A1", "A2", "A3", "A4"], ["HQ2", "A1", "A2", "A3", "A4"], ["HQ3", "A1", "A2", "A3", "A4"]]
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        load(qNum)
-        toolbarTitle.text = toolbarTitle.text! + " (\(qNum + 1)/\(qDict[index].count))"
+        qRand = Array(0...qDict[index].count - 1).shuffled()
+        load(qIndex)
+        toolbarTitle.text = toolbarTitle.text! + " (\(qIndex + 1)/\(qDict[index].count))"
         for button in buttons! {
             button.layer.cornerRadius = 5
             button.layer.borderWidth = 1
@@ -117,24 +118,26 @@ class QuestionVC: UIViewController {
             button.titleLabel?.numberOfLines = 1
             button.titleLabel?.minimumScaleFactor = 0.1
             button.titleLabel?.baselineAdjustment = .alignCenters
-        }
+            }
     }
     
-    func load(_ qNum:Int) {
+    func load(_ qIndex:Int) {
         switch index {
         case 0: toolbarTitle.text = "Science"
         case 1: toolbarTitle.text = "Mathematics"
         case 2: toolbarTitle.text = "Marvel Super Heroes"
         default: break }
-        question.text = qDict[index][qNum][0]
-        let answers = qDict[index][qNum]
-        a.setTitle(answers[p[0]], for: .normal)
-        b.setTitle(answers[p[1]], for: .normal)
-        c.setTitle(answers[p[2]], for: .normal)
-        d.setTitle(answers[p[3]], for: .normal)
+        question.text = qDict[index][qRand[qIndex]][0]
+        let answers = qDict[index][qRand[qIndex]]
+        a.setTitle(answers[aRand[0]], for: .normal)
+        b.setTitle(answers[aRand[1]], for: .normal)
+        c.setTitle(answers[aRand[2]], for: .normal)
+        d.setTitle(answers[aRand[3]], for: .normal)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
 }

@@ -194,7 +194,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="9pd-zt-zuk" firstAttribute="top" secondItem="rf5-hN-Ubw" secondAttribute="bottom" constant="10" id="8Tp-bX-skJ"/>
                             <constraint firstItem="rf5-hN-Ubw" firstAttribute="top" secondItem="zFt-ng-VJC" secondAttribute="bottom" constant="10" id="Co4-2Q-DPy"/>
                             <constraint firstItem="LmR-9C-2R8" firstAttribute="centerX" secondItem="zFt-ng-VJC" secondAttribute="centerX" id="DPk-2J-Yvc"/>
                             <constraint firstItem="zFt-ng-VJC" firstAttribute="top" secondItem="OHu-At-Ga5" secondAttribute="top" id="KdF-2h-D1B"/>
@@ -221,6 +220,7 @@
                         <outlet property="answer" destination="9pd-zt-zuk" id="KMG-LX-oFi"/>
                         <outlet property="indicator" destination="DRf-gH-tGn" id="9XU-cz-K8t"/>
                         <outlet property="result" destination="rf5-hN-Ubw" id="kff-nP-NjV"/>
+                        <outlet property="toolbarTitle" destination="LmR-9C-2R8" id="XSH-KT-y6a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGQ-Ks-ekw" userLabel="First Responder" sceneMemberID="firstResponder"/>
