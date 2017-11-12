@@ -36,17 +36,13 @@ class QuestionVC: UIViewController {
     }
     
     @IBAction func goToNext(_ sender: Any) {
-        if (qNum == qDict[index].count - 1) {
-            let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
-            fvc?.correctNum = self.correctNum
-            fvc?.totalNum = self.qDict[index].count
-            self.presentL(fvc!)
-        } else if (submited) {
+        if (submited) {
             submited = false
             selected = false
             let avc = storyboard?.instantiateViewController(withIdentifier: "avc") as? AnswerVC
             avc?.index = self.index
             avc?.qNum = self.qNum
+            avc?.totalNum = self.qDict[index].count
             avc?.correct = self.correct
             avc?.correctAns = self.qDict[index][qNum][1]
             avc?.correctNum = self.correctNum

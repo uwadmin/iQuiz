@@ -15,6 +15,7 @@ class AnswerVC: UIViewController {
 
     var index: Int = -1
     var qNum: Int = -1
+    var totalNum: Int = -1
     var correct: Bool = false
     var correctAns = ""
     var correctNum: Int = 0
@@ -26,11 +27,18 @@ class AnswerVC: UIViewController {
     }
 
     @IBAction func goToNext(_ sender: Any) {
-        let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
-        qvc?.index = self.index
-        qvc?.qNum = self.qNum + 1
-        qvc?.correctNum = self.correctNum
-        self.presentL(qvc!)
+        if (qNum + 1 == totalNum) {
+            let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
+            fvc?.correctNum = self.correctNum
+            fvc?.totalNum = self.totalNum
+            self.presentL(fvc!)
+        } else {
+            let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
+            qvc?.index = self.index
+            qvc?.qNum = self.qNum + 1
+            qvc?.correctNum = self.correctNum
+            self.presentL(qvc!)
+        }
     }
 
     override func viewDidLoad() {
