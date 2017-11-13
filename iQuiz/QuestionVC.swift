@@ -30,9 +30,24 @@ class QuestionVC: UIViewController {
     var selectedAns:String = ""
     
     let qDict: [[[String]]] = [
-        [["test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "test a very very long line of the question, test a very very long line of the question test a very very long line of the question", "A2", "A3", "A4"], ["SQ2", "A1", "A2", "A3", "A4"], ["SQ3", "A1", "A2", "A3", "A4"]],
-        [["MQ1", "A1", "A2", "A3", "A4"], ["MQ2", "A1", "A2", "A3", "A4"], ["MQ3", "A1", "A2", "A3", "A4"]],
-        [["HQ1", "A1", "A2", "A3", "A4"], ["HQ2", "A1", "A2", "A3", "A4"], ["HQ3", "A1", "A2", "A3", "A4"]]
+        [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
+          "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
+         ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
+          "7/2 × R", "2R", "5/2 × R", "3R"],
+         ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
+          "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
+        [["A tree is a connected graph with no cycles. How many nonisomorphic trees with 5 vertices exist?",
+          "3", "4", "5", "6"],
+         ["(1 + i)¹⁰ = ",
+          "32i", "32", "32(i + 1)", "1"],
+         ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
+          "32/3", "16/3", "104/105", "208/105"]],
+        [["J. Jonah Jameson spent a lot of money to defeat that wall-crawler. Just after the death of Gwen Stacy, who did JJJ pay to take him out?",
+          "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
+         ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
+          "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
+         ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
+          "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]]
     ]
     
     var aRand: [Int] = [1, 2, 3, 4].shuffled()
@@ -93,7 +108,7 @@ class QuestionVC: UIViewController {
             submited = true
             sender.isEnabled = false
             redoBtn.isEnabled = true
-            if (selectedAns == qDict[index][qIndex][1]) {
+            if (selectedAns == qDict[index][qRand[qIndex]][1]) {
                 correct = true
                 correctNum += 1
             }
@@ -106,13 +121,15 @@ class QuestionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        qRand = Array(0...qDict[index].count - 1).shuffled()
+        if (qRand.count == 0) {
+            qRand = Array(0...qDict[index].count - 1).shuffled()
+        }
         load(qIndex)
         toolbarTitle.text = toolbarTitle.text! + " (\(qIndex + 1)/\(qDict[index].count))"
         for button in buttons! {
             button.layer.cornerRadius = 5
             button.layer.borderWidth = 1
-            button.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+            button.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.lineBreakMode = .byClipping
             button.titleLabel?.numberOfLines = 1

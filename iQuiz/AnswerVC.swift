@@ -48,12 +48,17 @@ class AnswerVC: UIViewController {
         super.viewDidLoad()
         toolbarTitle.text = toolbarTitle.text! + " (\(qIndex + 1)/\(totalNum))"
         answer.text = correctAns
+        answer.layer.borderWidth = 2
+        answer.layer.cornerRadius = 5
+        
         if (correct) {
             result.text = "You got it correct! It is:"
             indicator.image = #imageLiteral(resourceName:"right")
+            answer.layer.borderColor = UIColor.green.cgColor
         } else {
             result.text = "You got it wrong! The right answer is:"
             indicator.image = #imageLiteral(resourceName:"wrong")
+            answer.layer.borderColor = UIColor.red.cgColor
         }
     }
 

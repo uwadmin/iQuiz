@@ -20,6 +20,7 @@
 		F06E270F1FAFF54E0070CC05 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E270E1FAFF54E0070CC05 /* Quiz.swift */; };
 		F092195B1FB692F000A73022 /* QuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092195A1FB692F000A73022 /* QuestionVC.swift */; };
 		F09A0D7B1FB004A700E96A2F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A0D7A1FB004A700E96A2F /* MainVC.swift */; };
+		F09F14B51FB94D3100E19F01 /* UIlable+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F14B41FB94D3100E19F01 /* UIlable+Padding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		F06E270E1FAFF54E0070CC05 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		F092195A1FB692F000A73022 /* QuestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionVC.swift; sourceTree = "<group>"; };
 		F09A0D7A1FB004A700E96A2F /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		F09F14B41FB94D3100E19F01 /* UIlable+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIlable+Padding.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				F007DF0D1FB6A6AA005B8B03 /* UIViewController+Swipe.swift */,
 				F007DF131FB6F747005B8B03 /* MutableCollection+Shuffle.swift */,
 				F007DF171FB74214005B8B03 /* Double+Rounded+Clean.swift */,
+				F09F14B41FB94D3100E19F01 /* UIlable+Padding.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			files = (
 				F09A0D7B1FB004A700E96A2F /* MainVC.swift in Sources */,
 				F007DF0E1FB6A6AA005B8B03 /* UIViewController+Swipe.swift in Sources */,
+				F09F14B51FB94D3100E19F01 /* UIlable+Padding.swift in Sources */,
 				F092195B1FB692F000A73022 /* QuestionVC.swift in Sources */,
 				F007DF101FB6E441005B8B03 /* AnswerVC.swift in Sources */,
 				F007DF141FB6F747005B8B03 /* MutableCollection+Shuffle.swift in Sources */,

@@ -26,18 +26,23 @@ class FinishedVC: UIViewController {
         let ratio:Double = Double(correctNum) / Double(totalNum)
         let percent:String = (100 * ratio).rounded(toPlaces: 1).clean
         grade.text = "\(correctNum)/\(totalNum) = \(percent)%"
+        grade.layer.borderWidth = 4
+        grade.layer.cornerRadius = 5
         if (ratio == 1) {
             label.text = "Amazing! "
             indicator.image = #imageLiteral(resourceName: "amazing")
             grade.textColor = .green
+            grade.layer.borderColor = UIColor.green.cgColor
         } else if (ratio > 0.6) {
             label.text = "Good! "
             indicator.image = #imageLiteral(resourceName: "good")
             grade.textColor = self.view.tintColor
+            grade.layer.borderColor = self.view.tintColor.cgColor
         } else {
             label.text = "You need to practice more! "
             indicator.image = #imageLiteral(resourceName: "practice")
             grade.textColor = .red
+            grade.layer.borderColor = UIColor.red.cgColor
         }
         label.text = label.text! + "You got \(correctNum) out of \(totalNum) right!"
     }
