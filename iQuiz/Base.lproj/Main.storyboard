@@ -301,6 +301,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Lt-8pA">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                        <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
                                         <state key="normal" title="A">
                                             <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
@@ -314,6 +315,7 @@
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gux-au-4Rq">
                                         <rect key="frame" x="0.0" y="59" width="300" height="49"/>
+                                        <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
                                         <state key="normal" title="B">
                                             <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
@@ -327,6 +329,7 @@
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9Q-UO-4Yu">
                                         <rect key="frame" x="0.0" y="118" width="300" height="49"/>
+                                        <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
                                         <state key="normal" title="C">
                                             <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
@@ -340,6 +343,7 @@
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-eh-FhM">
                                         <rect key="frame" x="0.0" y="177" width="300" height="49"/>
+                                        <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
                                         <state key="normal" title="D">
                                             <color key="titleColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
@@ -356,6 +360,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74B-IM-ef4">
                                 <rect key="frame" x="297" y="622" width="53" height="30"/>
+                                <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1F3-Am-teE"/>
                                 </constraints>
@@ -367,6 +372,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mZ-VG-XY6">
                                 <rect key="frame" x="25" y="622" width="53" height="30"/>
+                                <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Redo"/>
                                 <connections>
