@@ -25,13 +25,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
             fatalError("Unable to instantiate science")
         }
-        guard let math = Quiz(name: "Mathematics", photo: mathImg, desc: "Questions about math") else {
-            fatalError("Unable to instantiate math")
-        }
         guard let marvel = Quiz(name: "Marvel Super Heroes", photo: marvelImg, desc: "Questions about marvel super heroes") else {
             fatalError("Unable to instantiate marvel")
         }
-        quizzes += [science, math, marvel]
+        guard let math = Quiz(name: "Mathematics", photo: mathImg, desc: "Questions about math") else {
+            fatalError("Unable to instantiate math")
+        }
+        quizzes += [science, marvel, math]
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
