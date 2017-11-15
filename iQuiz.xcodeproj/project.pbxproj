@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F00110361FBBFBD600E8C9E7 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00110351FBBFBD600E8C9E7 /* SettingsVC.swift */; };
 		F007DF0E1FB6A6AA005B8B03 /* UIViewController+Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007DF0D1FB6A6AA005B8B03 /* UIViewController+Swipe.swift */; };
 		F007DF101FB6E441005B8B03 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007DF0F1FB6E441005B8B03 /* AnswerVC.swift */; };
 		F007DF121FB6ED8C005B8B03 /* FinishedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007DF111FB6ED8C005B8B03 /* FinishedVC.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F00110351FBBFBD600E8C9E7 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		F007DF0D1FB6A6AA005B8B03 /* UIViewController+Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Swipe.swift"; sourceTree = "<group>"; };
 		F007DF0F1FB6E441005B8B03 /* AnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
 		F007DF111FB6ED8C005B8B03 /* FinishedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedVC.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				F092195A1FB692F000A73022 /* QuestionVC.swift */,
 				F06E26FA1FAFE0680070CC05 /* Main.storyboard */,
 				F007DF111FB6ED8C005B8B03 /* FinishedVC.swift */,
+				F00110351FBBFBD600E8C9E7 /* SettingsVC.swift */,
 				F007DF0F1FB6E441005B8B03 /* AnswerVC.swift */,
 				F09A0D7A1FB004A700E96A2F /* MainVC.swift */,
 				F007DF0C1FB6A667005B8B03 /* Extensions */,
@@ -184,6 +187,7 @@
 				F09F14B51FB94D3100E19F01 /* UIlable+Padding.swift in Sources */,
 				F092195B1FB692F000A73022 /* QuestionVC.swift in Sources */,
 				F007DF101FB6E441005B8B03 /* AnswerVC.swift in Sources */,
+				F00110361FBBFBD600E8C9E7 /* SettingsVC.swift in Sources */,
 				F007DF141FB6F747005B8B03 /* MutableCollection+Shuffle.swift in Sources */,
 				F007DF181FB74214005B8B03 /* Double+Rounded+Clean.swift in Sources */,
 				F06E270F1FAFF54E0070CC05 /* Quiz.swift in Sources */,

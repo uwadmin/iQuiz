@@ -18,6 +18,7 @@ class AnswerVC: UIViewController {
     var qIndex: Int = -1
     var totalNum: Int = -1
     var qRand: [Int] = []
+    var qArr: [[[String]]] = []
     var correct: Bool = false
     var correctAns = ""
     var correctNum: Int = 0
@@ -40,6 +41,7 @@ class AnswerVC: UIViewController {
             qvc?.qIndex = self.qIndex + 1
             qvc?.correctNum = self.correctNum
             qvc?.qRand = self.qRand
+            qvc?.qArr = self.qArr
             self.presentL(qvc!)
         }
     }
