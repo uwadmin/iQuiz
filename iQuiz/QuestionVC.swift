@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import SystemConfiguration
-
 
 class QuestionVC: UIViewController {
     @IBOutlet weak var toolbarTitle: UILabel!
@@ -45,30 +43,29 @@ class QuestionVC: UIViewController {
     }
 
     var titleArr: [String] = []
-    var qArr: [[[String]]] = []
-
-//    let qArr: [[[String]]] = [
-//        [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
-//          "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
-//         ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
-//          "7/2 × R", "2R", "5/2 × R", "3R"],
-//         ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
-//          "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
-//        [["J. Jonah Jameson spent a lot of money to defeat that wall-crawler. Just after the death of Gwen Stacy, who did JJJ pay to take him out?",
-//          "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
-//         ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
-//          "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
-//         ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
-//          "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]],
-//        [["A tree is a connected graph with no cycles. How many nonisomorphic trees with 5 vertices exist?",
-//          "3", "4", "5", "6"],
-//         ["(1 + i)¹⁰ = ",
-//          "32i", "32", "32(i + 1)", "1"],
-//         ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
-//          "32/3", "16/3", "104/105", "208/105"]]
-//    ]
+    var qArr: [[[String]]] = [
+        [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
+          "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
+         ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
+          "7/2 × R", "2R", "5/2 × R", "3R"],
+         ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
+          "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
+        [["J. Jonah Jameson spent a lot of money to defeat that wall-crawler. Just after the death of Gwen Stacy, who did JJJ pay to take him out?",
+          "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
+         ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
+          "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
+         ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
+          "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]],
+        [["A tree is a connected graph with no cycles. How many nonisomorphic trees with 5 vertices exist?",
+          "3", "4", "5", "6"],
+         ["(1 + i)¹⁰ = ",
+          "32i", "32", "32(i + 1)", "1"],
+         ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
+          "32/3", "16/3", "104/105", "208/105"]]
+    ]
 
     func loadData() {
+        
         func readJson(_ urlStr: String) -> Data {
             var data = Data()
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -164,8 +161,10 @@ class QuestionVC: UIViewController {
 
     @IBAction func redoPressed(_ sender: UIButton) {
         submited = false
-        correct = false
-        correctNum -= 1
+        if (selectedAns == qArr[index][qRand[qIndex]][1]) {
+            correct = false
+            correctNum -= 1
+        }
         sender.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
         sender.isEnabled = false
         submitBtn.isEnabled = true
@@ -259,6 +258,4 @@ class QuestionVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
 }
