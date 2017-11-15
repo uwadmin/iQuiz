@@ -10,9 +10,11 @@ import UIKit
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    
     var quizzes = [Quiz]()
     var titleArr: [String] = []
-    var qArr: [[[String]]] = [
+    var qArr: [[[String]]] = []
+    var defaultQArr: [[[String]]] = [
         [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
           "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
          ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
@@ -33,6 +35,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
           "32/3", "16/3", "104/105", "208/105"]]
     ]
     
+    var urlStr = ""
+    
     struct QuizJSON: Codable {
         var title: String
         var desc: String
@@ -49,22 +53,25 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         func readJson(_ urlStr: String) -> Data {
             var data = Data()
-            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = dir.appendingPathComponent("data.json")
-                do {
-                    let text = try String(contentsOf: fileURL, encoding: .utf8)
-                    data = text.data(using: .utf8)!
-                    print("read file")
-                } catch {
-                    print(error)
-                }
-            } else {
+            if (valid(urlStr)) {
                 guard let url = URL(string: urlStr) else { fatalError("url not found") }
                 do {
                     data = try Data(contentsOf: url)
                     save(data)
                 } catch {
                     print("URL not found!", error)
+                }
+            } else {
+                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let fileURL = dir.appendingPathComponent("data.json")
+                    do {
+                        let text = try String(contentsOf: fileURL, encoding: .utf8)
+                        data = text.data(using: .utf8)!
+                        print("read file")
+                    } catch {
+                        print(urlStr)
+                        print("No such file")
+                    }
                 }
             }
             return data
@@ -77,7 +84,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 do {
-                    print(JSONString)
                     try JSONString.write(to: fileURL, atomically: false, encoding: .utf8)
                     print("wrote file")
                 }
@@ -86,8 +92,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
-        let urlStr = "https://cdn.rawgit.com/uwadmin/b583231b7dfa52dcdd00bc847bd57ea5/raw/3ce9d4dad4813d4231a6003cdc9c1037609409c7/data.json"
         
         let decoder = JSONDecoder()
         do {
@@ -110,16 +114,26 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } catch {
             print("URL not correct and no local quizzes found", error)
         }
+        if (qArr.count == 0) {
+            qArr = defaultQArr
+            print("no json found")
+        }
     }
 
+    func valid(_ urlString: String?) -> Bool {
+        guard let urlString = urlString,
+            let url = URL(string: urlString) else {
+                return false
+        }
+        return UIApplication.shared.canOpenURL(url)
+    }
 
     @IBAction func btnSettingsPressed(_ sender: UIBarButtonItem) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let svc = storyboard.instantiateViewController(
-            withIdentifier: "svc")
-        svc.modalPresentationStyle = .popover
-        svc.popoverPresentationController?.barButtonItem = sender
-        self.present(svc, animated: true) {}
+        let svc = storyboard?.instantiateViewController(withIdentifier: "svc") as? SettingsVC
+        svc?.modalPresentationStyle = .popover
+        svc?.popoverPresentationController?.barButtonItem = sender
+        svc?.urlStr = self.urlStr
+        self.present(svc!, animated: true) {}
     }
 
     private func loadQuizzes() {
