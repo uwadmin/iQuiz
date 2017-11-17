@@ -37,6 +37,7 @@ class AnswerVC: UIViewController {
             fvc?.correctNum = self.correctNum
             fvc?.totalNum = self.totalNum
             fvc?.urlStr = self.urlStr
+            fvc?.qArr = self.qArr
             self.presentL(fvc!)
         } else {
             let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC

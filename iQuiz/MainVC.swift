@@ -13,30 +13,34 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var quizzes = [Quiz]()
     var titleArr: [String] = []
-    var qArr: [[[String]]] = []
     var urlChanged = false
+    var urlStr = "https://tednewardsandbox.site44.com/questions.json"
+    var qArr: [[[String]]] = []
     var defaultQArr: [[[String]]] = [
-        [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
-            "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
-            ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
-                "7/2 × R", "2R", "5/2 × R", "3R"],
-            ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
-                "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
-        [["J. Jonah Jameson spent a lot of money to defeat that wall-crawler. Just after the death of Gwen Stacy, who did JJJ pay to take him out?",
-            "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
-            ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
-                "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
-            ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
-                "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]],
-        [["A tree is a connected graph with no cycles. How many nonisomorphic trees with 5 vertices exist?",
-            "3", "4", "5", "6"],
-            ["(1 + i)¹⁰ = ",
-                "32i", "32", "32(i + 1)", "1"],
-            ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
-                "32/3", "16/3", "104/105", "208/105"]]
+        [
+            ["What is fire?", "One of the four classical elements", "A magical reaction given to us by God", "A band that hasn\'t yet been discovered", "Fire! Fire! Fire! heh-heh"]
+        ],
+        [
+            ["Who is Iron Man?", "Tony Stark", "Obadiah Stane", "A rock hit by Megadeth", "Nobody knows"],
+            ["Who founded the X-Men?", "Professor X", "Tony Stark", "The X-Institute", "Erik Lensherr"],
+            ["How did Spider-Man get his powers?", "He was bitten by a radioactive spider", "He ate a radioactive spider", "He is a radioactive spider", "He looked at a radioactive spider"]
+        ],
+        [
+            ["What is 2+2?", "4", "22", "An irrational number", "Nobody knows"]
+        ]
     ]
 
-    var urlStr = "https://tednewardsandbox.site44.com/questions.json"
+
+    @IBAction func deleteFile(_ sender: Any) {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent("data.json")
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+            } catch let error as NSError {
+                print("Error: \(error.domain)")
+            }
+        }
+    }
 
     struct QuizJSON: Codable {
         var title: String
@@ -52,14 +56,39 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func loadData() {
         var data = Data()
+        
         func readJson(_ urlStr: String) -> Data {
-            if (urlChanged) {
-                fetch()
-            } else {
-                loadLocal()
-            }
+            urlChanged ? fetch() : loadLocal()
             return data
         }
+
+        if (qArr.count == 0 || urlChanged) {
+            let decoder = JSONDecoder()
+            do {
+                let allQuizzes = try decoder.decode([QuizJSON].self, from: readJson(urlStr))
+                qArr = []
+                for quiz in allQuizzes {
+                    titleArr.append(quiz.title)
+                    var catArr: [[String]] = []
+                    
+                    for question in quiz.questions {
+                        var questArr: [String] = []
+                        questArr.append(question.text)
+                        for answer in question.answers {
+                            questArr.append(answer)
+                        }
+                        questArr.swapAt(1, Int(question.answer)!)
+                        catArr.append(questArr)
+                    }
+                    qArr.append(catArr)
+                }
+            } catch {
+                qArr = defaultQArr
+                print("URL not correct and no local quizzes found", error)
+            }
+        }
+
+        urlChanged = false
         
         func fetch() {
             if (valid(urlStr)) {
@@ -72,7 +101,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
+
         func loadLocal() {
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent("data.json")
@@ -81,7 +110,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     data = text.data(using: .utf8)!
                     print("read file")
                 } catch {
-                    print(urlStr)
                     print("No such file")
                 }
             }
@@ -102,36 +130,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-
-        let decoder = JSONDecoder()
-        do {
-            let allQuizzes = try decoder.decode([QuizJSON].self, from: readJson(urlStr))
-            qArr = []
-            for quiz in allQuizzes {
-                titleArr.append(quiz.title)
-                var catArr: [[String]] = []
-
-                for question in quiz.questions {
-                    var questArr: [String] = []
-                    questArr.append(question.text)
-                    for answer in question.answers {
-                        questArr.append(answer)
-                    }
-                    questArr.swapAt(1, Int(question.answer)!)
-                    catArr.append(questArr)
-                }
-                qArr.append(catArr)
-            }
-        } catch {
-            print("URL not correct and no local quizzes found", error)
-        }
-        if (qArr.count == 0) {
-            qArr = defaultQArr
-            print("no json found")
-        }
-        print("updated")
-        print(qArr)
-        urlChanged = false
     }
 
     func valid(_ urlString: String?) -> Bool {
@@ -154,6 +152,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let scienceImg = UIImage(named: "Science")
         let mathImg = UIImage(named: "Math")
         let marvelImg = UIImage(named: "Marvel")
+        
         guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
             fatalError("Unable to instantiate science")
         }
@@ -202,6 +201,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         urlChanged = true
         loadData()
+        tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             refreshControl.endRefreshing()
         }
@@ -215,7 +215,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refreshControl.tintColor = self.view.tintColor
         refreshControl.attributedTitle = NSAttributedString(string: "Update Quiz Data...")
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl

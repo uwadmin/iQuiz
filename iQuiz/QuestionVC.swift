@@ -40,6 +40,7 @@ class QuestionVC: UIViewController {
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         mvc?.urlStr = self.urlStr
+        mvc?.qArr = self.qArr
         self.presentR(mvc!)
     }
 
@@ -55,6 +56,7 @@ class QuestionVC: UIViewController {
             avc?.correctAns = self.qArr[index][qRand[qIndex]][1]
             avc?.correctNum = self.correctNum
             avc?.qRand = self.qRand
+            avc?.qArr = self.qArr
             avc?.urlStr = self.urlStr
             self.presentL(avc!)
         } else {
@@ -151,8 +153,6 @@ class QuestionVC: UIViewController {
         case 1: toolbarTitle.text = "Marvel Super Heroes"
         case 2: toolbarTitle.text = "Mathematics"
         default: break }
-        print("Question")
-        print(qArr)
         question.text = qArr[index][qRand[qIndex]][0]
         let answers = qArr[index][qRand[qIndex]]
         a.setTitle(answers[aRand[0]], for: .normal)
