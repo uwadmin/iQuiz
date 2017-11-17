@@ -10,49 +10,58 @@ import UIKit
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    
+
     var quizzes = [Quiz]()
     var titleArr: [String] = []
     var qArr: [[[String]]] = []
+    var urlChanged = false
     var defaultQArr: [[[String]]] = [
         [["Electromagnetic radiation emitted from a nucleus is most likely to be in the form of",
-          "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
-         ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
-          "7/2 × R", "2R", "5/2 × R", "3R"],
-         ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
-          "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
+            "gamma rays", "microwaves", "visible light", "ultraviolet radiation"],
+            ["What is the limiting high-temperature molar heat capacity at constant volume of a gas-phase diatomic molecule?",
+                "7/2 × R", "2R", "5/2 × R", "3R"],
+            ["Which of the following techniques could be used to demonstrate protein binding to specific DNA sequences?",
+                "Western blot hybridization", "Northern blot hybridization", "Southern blot hybridization", "Polymerase chain reaction"]],
         [["J. Jonah Jameson spent a lot of money to defeat that wall-crawler. Just after the death of Gwen Stacy, who did JJJ pay to take him out?",
-          "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
-         ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
-          "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
-         ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
-          "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]],
+            "Luke Cage", "Doctor Octopus", "Scorpion", "Taskmaster"],
+            ["In a plot twist nobody cared about, the Masked Maurader was revealed to be:",
+                "Daredevil's landlord", "Peter Parker's roommate", "The Fantastic Four's mailman", "The X-Men's housekeeper"],
+            ["An off-hand comment by Stan Lee caused Iron Man to receive what odd addition to his armor?",
+                "Iron Nose", "Iron Toes", "Iron Fingernails", "Iron Nipples"]],
         [["A tree is a connected graph with no cycles. How many nonisomorphic trees with 5 vertices exist?",
-          "3", "4", "5", "6"],
-         ["(1 + i)¹⁰ = ",
-          "32i", "32", "32(i + 1)", "1"],
-         ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
-          "32/3", "16/3", "104/105", "208/105"]]
+            "3", "4", "5", "6"],
+            ["(1 + i)¹⁰ = ",
+                "32i", "32", "32(i + 1)", "1"],
+            ["What is the volume of the solid in xyz-space bounded by the surfaces y = x² , y = 2 - x² , z = 0, and z = y + 3?",
+                "32/3", "16/3", "104/105", "208/105"]]
     ]
-    
-    var urlStr = ""
-    
+
+    var urlStr = "https://tednewardsandbox.site44.com/questions.json"
+
     struct QuizJSON: Codable {
         var title: String
         var desc: String
         var questions: [Question]
-        
+
         struct Question: Codable {
             let text: String
             let answer: String
             let answers: [String]
         }
     }
-    
+
     func loadData() {
-        
+        var data = Data()
         func readJson(_ urlStr: String) -> Data {
-            var data = Data()
+            if (urlChanged) {
+                fetch()
+            } else {
+                loadLocal()
+            }
+            return data
+        }
+        
+        func fetch() {
             if (valid(urlStr)) {
                 guard let url = URL(string: urlStr) else { fatalError("url not found") }
                 do {
@@ -61,22 +70,23 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } catch {
                     print("URL not found!", error)
                 }
-            } else {
-                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let fileURL = dir.appendingPathComponent("data.json")
-                    do {
-                        let text = try String(contentsOf: fileURL, encoding: .utf8)
-                        data = text.data(using: .utf8)!
-                        print("read file")
-                    } catch {
-                        print(urlStr)
-                        print("No such file")
-                    }
-                }
             }
-            return data
         }
         
+        func loadLocal() {
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = dir.appendingPathComponent("data.json")
+                do {
+                    let text = try String(contentsOf: fileURL, encoding: .utf8)
+                    data = text.data(using: .utf8)!
+                    print("read file")
+                } catch {
+                    print(urlStr)
+                    print("No such file")
+                }
+            }
+        }
+
         func save(_ content: Data) {
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent("data.json")
@@ -92,14 +102,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
+
         let decoder = JSONDecoder()
         do {
             let allQuizzes = try decoder.decode([QuizJSON].self, from: readJson(urlStr))
+            qArr = []
             for quiz in allQuizzes {
                 titleArr.append(quiz.title)
                 var catArr: [[String]] = []
-                
+
                 for question in quiz.questions {
                     var questArr: [String] = []
                     questArr.append(question.text)
@@ -118,6 +129,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             qArr = defaultQArr
             print("no json found")
         }
+        print("updated")
+        print(qArr)
+        urlChanged = false
     }
 
     func valid(_ urlString: String?) -> Bool {
@@ -133,7 +147,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         svc?.modalPresentationStyle = .popover
         svc?.popoverPresentationController?.barButtonItem = sender
         svc?.urlStr = self.urlStr
-        self.present(svc!, animated: true) {}
+        self.present(svc!, animated: true) { }
     }
 
     private func loadQuizzes() {
@@ -175,21 +189,38 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.desLabel.text = quiz.desc
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
         qvc?.index = indexPath.row
-        qvc?.qArr = self.qArr
+        qvc?.urlStr = self.urlStr
         qvc?.titleArr = self.titleArr
         self.presentL(qvc!)
     }
-    
-   override func viewDidLoad() {
+
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
+        urlChanged = true
+        loadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            refreshControl.endRefreshing()
+        }
+    }
+
+    override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
         loadQuizzes()
         tableView.dataSource = self
         tableView.delegate = self
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refreshControl.tintColor = self.view.tintColor
+        refreshControl.attributedTitle = NSAttributedString(string: "Update Quiz Data...")
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
     }
 
     override func didReceiveMemoryWarning() {

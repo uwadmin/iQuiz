@@ -22,10 +22,12 @@ class AnswerVC: UIViewController {
     var correct: Bool = false
     var correctAns = ""
     var correctNum: Int = 0
+    var urlStr = ""
 
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
+        mvc?.urlStr = self.urlStr
         self.presentR(mvc!)
     }
 
@@ -34,6 +36,7 @@ class AnswerVC: UIViewController {
             let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
             fvc?.correctNum = self.correctNum
             fvc?.totalNum = self.totalNum
+            fvc?.urlStr = self.urlStr
             self.presentL(fvc!)
         } else {
             let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
@@ -41,7 +44,7 @@ class AnswerVC: UIViewController {
             qvc?.qIndex = self.qIndex + 1
             qvc?.correctNum = self.correctNum
             qvc?.qRand = self.qRand
-            qvc?.qArr = self.qArr
+            qvc?.urlStr = self.urlStr
             self.presentL(qvc!)
         }
     }

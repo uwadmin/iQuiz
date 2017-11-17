@@ -27,6 +27,7 @@ class QuestionVC: UIViewController {
     var correctNum: Int = 0
     var index: Int = -1
     var qIndex: Int = 0
+    var urlStr = ""
     var selectedAns: String = ""
     let path = Bundle.main.path(forResource: "data", ofType: "json")
 
@@ -38,6 +39,7 @@ class QuestionVC: UIViewController {
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
+        mvc?.urlStr = self.urlStr
         self.presentR(mvc!)
     }
 
@@ -53,7 +55,7 @@ class QuestionVC: UIViewController {
             avc?.correctAns = self.qArr[index][qRand[qIndex]][1]
             avc?.correctNum = self.correctNum
             avc?.qRand = self.qRand
-            avc?.qArr = self.qArr
+            avc?.urlStr = self.urlStr
             self.presentL(avc!)
         } else {
             let alert = UIAlertController(title: "Please select an answer and submit first!", message: "", preferredStyle: .alert)
@@ -149,6 +151,8 @@ class QuestionVC: UIViewController {
         case 1: toolbarTitle.text = "Marvel Super Heroes"
         case 2: toolbarTitle.text = "Mathematics"
         default: break }
+        print("Question")
+        print(qArr)
         question.text = qArr[index][qRand[qIndex]][0]
         let answers = qArr[index][qRand[qIndex]]
         a.setTitle(answers[aRand[0]], for: .normal)

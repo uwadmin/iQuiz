@@ -15,9 +15,11 @@ class FinishedVC: UIViewController {
     @IBOutlet weak var grade: UILabel!
     var correctNum:Int = 0
     var totalNum:Int = 0
+    var urlStr = ""
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
+        mvc?.urlStr = self.urlStr
         presentR(mvc!)
     }
     
