@@ -194,6 +194,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
         qvc?.index = indexPath.row
         qvc?.urlStr = self.urlStr
+        qvc?.qArr = self.qArr
         qvc?.titleArr = self.titleArr
         self.presentL(qvc!)
     }
