@@ -515,11 +515,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Ks5-46-BIL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tgd-xk-6ha" secondAttribute="trailing" id="4ct-M7-KMv"/>
                             <constraint firstItem="i0s-4g-26K" firstAttribute="top" secondItem="ILt-En-VXT" secondAttribute="bottom" constant="50" id="9Gq-Xm-68N"/>
                             <constraint firstItem="tgd-xk-6ha" firstAttribute="top" secondItem="ILt-En-VXT" secondAttribute="bottom" constant="8" id="9Ym-P0-Ubk"/>
                             <constraint firstItem="Ks5-46-BIL" firstAttribute="bottom" secondItem="tgd-xk-6ha" secondAttribute="bottom" id="GCB-Vc-ojb"/>
                             <constraint firstItem="Ks5-46-BIL" firstAttribute="trailing" secondItem="ILt-En-VXT" secondAttribute="trailing" id="GUi-2k-jzi"/>
-                            <constraint firstItem="ILt-En-VXT" firstAttribute="centerX" secondItem="sdz-V8-yuk" secondAttribute="centerX" id="LL3-v4-ZwS"/>
                             <constraint firstItem="sdz-V8-yuk" firstAttribute="trailing" secondItem="ILt-En-VXT" secondAttribute="trailing" constant="16" id="N2j-BK-k2o"/>
                             <constraint firstItem="ILt-En-VXT" firstAttribute="leading" secondItem="sdz-V8-yuk" secondAttribute="leading" constant="16" id="Rck-d6-Fxy"/>
                             <constraint firstItem="i0s-4g-26K" firstAttribute="centerX" secondItem="X6C-44-lnT" secondAttribute="centerX" id="biC-vF-JLY"/>
