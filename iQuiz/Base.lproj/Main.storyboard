@@ -64,9 +64,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5CH-Sg-yaU">
                                                     <rect key="frame" x="16" y="8" width="93.5" height="93.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="0yL-OO-yd5"/>
                                                         <constraint firstAttribute="width" secondItem="5CH-Sg-yaU" secondAttribute="height" multiplier="1:1" id="Ls3-OB-RaN"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Pe0-Il-2dt"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="oT8-kb-fMQ">

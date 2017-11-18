@@ -62,6 +62,26 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             urlChanged ? fetch() : loadLocal()
             return data
         }
+        
+        func loadLocal() {
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = dir.appendingPathComponent("data.json")
+                do {
+                    let text = try String(contentsOf: fileURL, encoding: .utf8)
+                    data = text.data(using: .utf8)!
+                    print("read file")
+                } catch {
+                    if (qArr.count == 0) {
+                        qArr = defaultQArr
+                    }
+                    if (titleDesc.count == 0) {
+                        titleDesc = defaultTitleDesc
+                    }
+                    print("No such file")
+                }
+            }
+        }
+
 
         if (qArr.count == 0 || urlChanged) {
             let decoder = JSONDecoder()
@@ -85,13 +105,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     titleDesc.append(titleArr)
                 }
             } catch {
-                if (qArr.count == 0) {
-                    qArr = defaultQArr
-                }
-                if (titleDesc.count == 0) {
-                    titleDesc = defaultTitleDesc
-                }
-                print("URL not correct and no local quizzes found", error)
+                loadLocal()
+                print("URL not correct", error)
             }
         }
 
@@ -105,19 +120,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     save(data)
                 } catch {
                     print("URL not found!", error)
-                }
-            }
-        }
-
-        func loadLocal() {
-            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = dir.appendingPathComponent("data.json")
-                do {
-                    let text = try String(contentsOf: fileURL, encoding: .utf8)
-                    data = text.data(using: .utf8)!
-                    print("read file")
-                } catch {
-                    print("No such file")
                 }
             }
         }
