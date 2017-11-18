@@ -12,7 +12,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
 
     var quizzes = [Quiz]()
-    var titleArr: [String] = []
+    var titleDesc: [[String]] = []
     var urlChanged = false
     var urlStr = "https://tednewardsandbox.site44.com/questions.json"
     var qArr: [[[String]]] = []
@@ -67,10 +67,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             do {
                 let allQuizzes = try decoder.decode([QuizJSON].self, from: readJson(urlStr))
                 qArr = []
+                titleDesc = []
                 for quiz in allQuizzes {
-                    titleArr.append(quiz.title)
                     var catArr: [[String]] = []
-                    
+                    var titleArr: [String] = [quiz.title, quiz.desc]
                     for question in quiz.questions {
                         var questArr: [String] = []
                         questArr.append(question.text)
@@ -81,9 +81,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         catArr.append(questArr)
                     }
                     qArr.append(catArr)
+                    titleDesc.append(titleArr)
                 }
             } catch {
-                qArr = defaultQArr
+                if (qArr.count == 0) {
+                    qArr = defaultQArr
+                }
                 print("URL not correct and no local quizzes found", error)
             }
         }
@@ -144,25 +147,31 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let svc = storyboard?.instantiateViewController(withIdentifier: "svc") as? SettingsVC
         svc?.modalPresentationStyle = .popover
         svc?.popoverPresentationController?.barButtonItem = sender
-        svc?.urlStr = self.urlStr
         self.present(svc!, animated: true) { }
     }
 
-    private func loadQuizzes() {
+    func loadQuizzes() {
         let scienceImg = UIImage(named: "Science")
         let mathImg = UIImage(named: "Math")
         let marvelImg = UIImage(named: "Marvel")
-        
-        guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
-            fatalError("Unable to instantiate science")
+//
+//        guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
+//            fatalError("Unable to instantiate science")
+//        }
+//        guard let marvel = Quiz(name: "Marvel Super Heroes", photo: marvelImg, desc: "Questions about marvel super heroes") else {
+//            fatalError("Unable to instantiate marvel")
+//        }
+//        guard let math = Quiz(name: "Mathematics", photo: mathImg, desc: "Questions about math") else {
+//            fatalError("Unable to instantiate math")
+//        }
+        quizzes = []
+        for ele in titleDesc {
+            guard let quizCell = Quiz(name: ele[0], photo: scienceImg, desc: ele[1]) else {
+                fatalError("Unable to instantiate \(ele[0])")
+            }
+            quizzes += [quizCell]
         }
-        guard let marvel = Quiz(name: "Marvel Super Heroes", photo: marvelImg, desc: "Questions about marvel super heroes") else {
-            fatalError("Unable to instantiate marvel")
-        }
-        guard let math = Quiz(name: "Mathematics", photo: mathImg, desc: "Questions about math") else {
-            fatalError("Unable to instantiate math")
-        }
-        quizzes += [science, marvel, math]
+//        quizzes += [science, marvel, math]
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -194,7 +203,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         qvc?.index = indexPath.row
         qvc?.urlStr = self.urlStr
         qvc?.qArr = self.qArr
-        qvc?.titleArr = self.titleArr
+        qvc?.titleDesc = self.titleDesc
         self.presentL(qvc!)
     }
 
@@ -220,6 +229,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             tableView.refreshControl = refreshControl
         } else {
             tableView.addSubview(refreshControl)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if animated {
+            print("test")
+            loadQuizzes()
+            loadData()
+            tableView.reloadData()
         }
     }
 

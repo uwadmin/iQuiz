@@ -30,9 +30,9 @@ class QuestionVC: UIViewController {
     var urlStr = ""
     var selectedAns: String = ""
     let path = Bundle.main.path(forResource: "data", ofType: "json")
-
-    var titleArr: [String] = []
+    
     var qArr: [[[String]]] = []
+    var titleDesc: [[String]] = []
     
     var aRand: [Int] = [1, 2, 3, 4].shuffled()
     var qRand: [Int] = []
@@ -41,6 +41,7 @@ class QuestionVC: UIViewController {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         mvc?.urlStr = self.urlStr
         mvc?.qArr = self.qArr
+        mvc?.titleDesc = self.titleDesc
         self.presentR(mvc!)
     }
 
@@ -58,6 +59,7 @@ class QuestionVC: UIViewController {
             avc?.qRand = self.qRand
             avc?.qArr = self.qArr
             avc?.urlStr = self.urlStr
+            avc?.titleDesc = self.titleDesc
             self.presentL(avc!)
         } else {
             let alert = UIAlertController(title: "Please select an answer and submit first!", message: "", preferredStyle: .alert)

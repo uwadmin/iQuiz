@@ -9,32 +9,35 @@
 import UIKit
 
 class SettingsVC: UIViewController {
-    
+
     @IBOutlet weak var input: UITextField!
-    
-    var urlStr = "https://cdn.rawgit.com/uwadmin/b583231b7dfa52dcdd00bc847bd57ea5/raw/3ce9d4dad4813d4231a6003cdc9c1037609409c7/data.json"
+
+    var urlStr = ""
 
     @IBAction func github(_ sender: Any) {
-        input.text = "https://cdn.rawgit.com/uwadmin/b583231b7dfa52dcdd00bc847bd57ea5/raw/3ce9d4dad4813d4231a6003cdc9c1037609409c7/data.json"
+        input.text = "https://cdn.rawgit.com/uwadmin/b583231b7dfa52dcdd00bc847bd57ea5/raw/9c32101231d70c780710edc7a69cbcbc6042036e/data.json"
     }
-    
+
     @IBAction func ted(_ sender: Any) {
         input.text = "https://tednewardsandbox.site44.com/questions.json"
     }
-    
+
     @IBAction func dismiss(_ sender: Any) {
         let mvc = self.presentingViewController as! MainVC
         if (valid(urlStr)) {
             mvc.urlStr = self.urlStr
             mvc.urlChanged = true
+//            dismiss(animated: true, completion: {
+//                mvc.loadData()
+//                mvc.loadQuizzes()
+//                mvc.tableView.reloadData()
+//            })
+//        } else
         }
-        dismiss(animated: true, completion: {
-            mvc.loadData()
-            mvc.tableView.reloadData()
-        })
-        dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
+//        }
     }
-    
+
     @IBAction func updateURL(_ sender: UIButton) {
         if (valid(input.text)) {
             urlStr = input.text!
@@ -42,20 +45,20 @@ class SettingsVC: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Not a valid URL", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Not a valid HTTPS URL", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
+
     func valid(_ urlString: String?) -> Bool {
-        guard let urlString = urlString,
-            let url = URL(string: urlString) else {
-                return false
-        }
-        return UIApplication.shared.canOpenURL(url)
+        guard let urlString = urlString, let url = URL(string: urlString) else { return false }
+        if !UIApplication.shared.canOpenURL(url) { return false }
+        let regEx = "^https://[^\\s/$.?#].[^\\s]*$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", argumentArray: [regEx])
+        return predicate.evaluate(with: urlString)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,7 +69,7 @@ class SettingsVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation

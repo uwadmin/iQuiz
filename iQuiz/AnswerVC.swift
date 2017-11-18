@@ -19,6 +19,7 @@ class AnswerVC: UIViewController {
     var totalNum: Int = -1
     var qRand: [Int] = []
     var qArr: [[[String]]] = []
+    var titleDesc: [[String]] = []
     var correct: Bool = false
     var correctAns = ""
     var correctNum: Int = 0
@@ -38,14 +39,18 @@ class AnswerVC: UIViewController {
             fvc?.totalNum = self.totalNum
             fvc?.urlStr = self.urlStr
             fvc?.qArr = self.qArr
+            fvc?.titleDesc = self.titleDesc
             self.presentL(fvc!)
         } else {
             let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
+//            let qvc = presentingViewController as? QuestionVC
             qvc?.index = self.index
             qvc?.qIndex = self.qIndex + 1
             qvc?.correctNum = self.correctNum
             qvc?.qRand = self.qRand
             qvc?.urlStr = self.urlStr
+            qvc?.titleDesc = self.titleDesc
+            qvc?.qArr = self.qArr
             self.presentL(qvc!)
         }
     }

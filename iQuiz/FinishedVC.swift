@@ -17,11 +17,13 @@ class FinishedVC: UIViewController {
     var totalNum:Int = 0
     var urlStr = ""
     var qArr:[[[String]]] = []
+    var titleDesc: [[String]] = []
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         mvc?.urlStr = self.urlStr
         mvc?.qArr = self.qArr
+        mvc?.titleDesc = self.titleDesc
         presentR(mvc!)
     }
     
