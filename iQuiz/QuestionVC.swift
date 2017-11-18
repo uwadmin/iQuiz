@@ -150,11 +150,7 @@ class QuestionVC: UIViewController {
     }
 
     func load(_ qIndex: Int) {
-        switch index {
-        case 0: toolbarTitle.text = "Science"
-        case 1: toolbarTitle.text = "Marvel Super Heroes"
-        case 2: toolbarTitle.text = "Mathematics"
-        default: break }
+        toolbarTitle.text = titleDesc[index][0]
         question.text = qArr[index][qRand[qIndex]][0]
         let answers = qArr[index][qRand[qIndex]]
         a.setTitle(answers[aRand[0]], for: .normal)

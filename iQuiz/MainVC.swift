@@ -16,6 +16,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var urlChanged = false
     var urlStr = "https://tednewardsandbox.site44.com/questions.json"
     var qArr: [[[String]]] = []
+    var defaultTitleDesc: [[String]] = [["Science!", "Because SCIENCE!"], ["Marvel Super Heroes", "Avengers, Assemble!"], ["Mathematics", "Did you pass the third grade?"]]
     var defaultQArr: [[[String]]] = [
         [
             ["What is fire?", "One of the four classical elements", "A magical reaction given to us by God", "A band that hasn\'t yet been discovered", "Fire! Fire! Fire! heh-heh"]
@@ -86,6 +87,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } catch {
                 if (qArr.count == 0) {
                     qArr = defaultQArr
+                }
+                if (titleDesc.count == 0) {
+                    titleDesc = defaultTitleDesc
                 }
                 print("URL not correct and no local quizzes found", error)
             }
@@ -229,15 +233,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             tableView.refreshControl = refreshControl
         } else {
             tableView.addSubview(refreshControl)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if animated {
-            print("test")
-            loadQuizzes()
-            loadData()
-            tableView.reloadData()
         }
     }
 

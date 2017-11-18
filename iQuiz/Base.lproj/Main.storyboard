@@ -473,47 +473,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H21-kc-Onk">
-                                <rect key="frame" x="170" y="318" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="dismiss:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="Hsq-DH-AYh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqv-sM-T89">
-                                <rect key="frame" x="148" y="261" width="79" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Check Now"/>
-                                <connections>
-                                    <action selector="updateURL:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="8s0-vf-eWE"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input the JSON URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILt-En-VXT">
-                                <rect key="frame" x="16" y="147" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="i0s-4g-26K">
+                                <rect key="frame" x="148" y="258.5" width="79" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqv-sM-T89">
+                                        <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
+                                        <state key="normal" title="Check Now"/>
+                                        <connections>
+                                            <action selector="updateURL:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="8s0-vf-eWE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H21-kc-Onk">
+                                        <rect key="frame" x="22.5" y="50" width="34" height="30"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <action selector="dismiss:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="Hsq-DH-AYh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input the JSON URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILt-En-VXT">
+                                <rect key="frame" x="16" y="178.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgd-xk-6ha">
-                                <rect key="frame" x="17" y="185" width="44" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="github"/>
-                                <connections>
-                                    <action selector="github:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="XYd-jL-oqn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ks5-46-BIL">
-                                <rect key="frame" x="321" y="185" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ks5-46-BIL">
+                                <rect key="frame" x="329" y="217" width="30" height="30"/>
                                 <state key="normal" title="ted"/>
                                 <connections>
                                     <action selector="ted:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="2DR-uP-om8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgd-xk-6ha">
+                                <rect key="frame" x="16" y="217" width="44" height="30"/>
+                                <state key="normal" title="github"/>
+                                <connections>
+                                    <action selector="github:" destination="Xhj-fD-tcf" eventType="touchUpInside" id="XYd-jL-oqn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="i0s-4g-26K" firstAttribute="top" secondItem="ILt-En-VXT" secondAttribute="bottom" constant="50" id="9Gq-Xm-68N"/>
+                            <constraint firstItem="tgd-xk-6ha" firstAttribute="top" secondItem="ILt-En-VXT" secondAttribute="bottom" constant="8" id="9Ym-P0-Ubk"/>
+                            <constraint firstItem="Ks5-46-BIL" firstAttribute="bottom" secondItem="tgd-xk-6ha" secondAttribute="bottom" id="GCB-Vc-ojb"/>
+                            <constraint firstItem="Ks5-46-BIL" firstAttribute="trailing" secondItem="ILt-En-VXT" secondAttribute="trailing" id="GUi-2k-jzi"/>
+                            <constraint firstItem="ILt-En-VXT" firstAttribute="centerX" secondItem="sdz-V8-yuk" secondAttribute="centerX" id="LL3-v4-ZwS"/>
+                            <constraint firstItem="sdz-V8-yuk" firstAttribute="trailing" secondItem="ILt-En-VXT" secondAttribute="trailing" constant="16" id="N2j-BK-k2o"/>
+                            <constraint firstItem="ILt-En-VXT" firstAttribute="leading" secondItem="sdz-V8-yuk" secondAttribute="leading" constant="16" id="Rck-d6-Fxy"/>
+                            <constraint firstItem="i0s-4g-26K" firstAttribute="centerX" secondItem="X6C-44-lnT" secondAttribute="centerX" id="biC-vF-JLY"/>
+                            <constraint firstItem="tgd-xk-6ha" firstAttribute="leading" secondItem="ILt-En-VXT" secondAttribute="leading" id="kKp-Oy-hh6"/>
+                            <constraint firstItem="ILt-En-VXT" firstAttribute="centerY" secondItem="sdz-V8-yuk" secondAttribute="centerY" constant="-150" id="mrd-dz-5pn"/>
+                            <constraint firstItem="Ks5-46-BIL" firstAttribute="top" secondItem="tgd-xk-6ha" secondAttribute="top" id="xet-Nc-yMw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sdz-V8-yuk"/>
                     </view>
                     <connections>

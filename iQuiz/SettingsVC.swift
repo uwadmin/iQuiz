@@ -15,7 +15,7 @@ class SettingsVC: UIViewController {
     var urlStr = ""
 
     @IBAction func github(_ sender: Any) {
-        input.text = "https://cdn.rawgit.com/uwadmin/b583231b7dfa52dcdd00bc847bd57ea5/raw/9c32101231d70c780710edc7a69cbcbc6042036e/data.json"
+        input.text = "https://cdn.rawgit.com/uwadmin/c3b4021fa726c8ac7a318a0901901730/raw/2be68cc1e49cf6f12305536e84e44308fddad5d6/test.json"
     }
 
     @IBAction func ted(_ sender: Any) {
@@ -23,24 +23,17 @@ class SettingsVC: UIViewController {
     }
 
     @IBAction func dismiss(_ sender: Any) {
-        let mvc = self.presentingViewController as! MainVC
-        if (valid(urlStr)) {
-            mvc.urlStr = self.urlStr
-            mvc.urlChanged = true
-//            dismiss(animated: true, completion: {
-//                mvc.loadData()
-//                mvc.loadQuizzes()
-//                mvc.tableView.reloadData()
-//            })
-//        } else
-        }
-            dismiss(animated: true, completion: nil)
-//        }
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func updateURL(_ sender: UIButton) {
         if (valid(input.text)) {
-            urlStr = input.text!
+            let mvc = self.presentingViewController as! MainVC
+            mvc.urlStr = self.input.text!
+            mvc.urlChanged = true
+            mvc.loadData()
+            mvc.loadQuizzes()
+            mvc.tableView.reloadData()
             let alert = UIAlertController(title: "URL Updated!", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
