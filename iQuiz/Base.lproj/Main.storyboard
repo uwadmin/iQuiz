@@ -192,7 +192,7 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ANS" lineBreakMode="clip" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pd-zt-zuk" customClass="EdgeInsetLabel" customModule="iQuiz" customModuleProvider="target">
-                                <rect key="frame" x="16" y="119" width="343" height="41.5"/>
+                                <rect key="frame" x="16" y="119" width="343" height="51.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="35"/>
                                 <color key="textColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
@@ -212,7 +212,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DRf-gH-tGn">
-                                <rect key="frame" x="137.5" y="170.5" width="100" height="100"/>
+                                <rect key="frame" x="137.5" y="180.5" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="100" id="77o-Jk-c5Q"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Q7a-GU-h6q"/>
@@ -674,7 +674,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bNB-zY-Nse">
-                                <rect key="frame" x="137" y="211" width="100" height="100"/>
+                                <rect key="frame" x="137" y="221" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="100" id="CAz-Si-ngp"/>
                                     <constraint firstAttribute="width" secondItem="bNB-zY-Nse" secondAttribute="height" multiplier="1:1" id="DqI-eT-es1"/>
@@ -684,7 +684,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zRK-BE-U4J" customClass="EdgeInsetLabel" customModule="iQuiz" customModuleProvider="target">
-                                <rect key="frame" x="16" y="129" width="343" height="72"/>
+                                <rect key="frame" x="16" y="129" width="343" height="82"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

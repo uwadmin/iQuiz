@@ -30,6 +30,8 @@ class AnswerVC: UIViewController {
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mvc") as! MainVC
         mvc.urlStr = self.urlStr
+        mvc.qArr = self.qArr
+        mvc.titleDesc = self.titleDesc
         mvc.scoreArr = self.scoreArr
         self.presentR(mvc)
     }
