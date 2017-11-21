@@ -18,12 +18,15 @@ class FinishedVC: UIViewController {
     var urlStr = ""
     var qArr:[[[String]]] = []
     var titleDesc: [[String]] = []
+    var scoreArr:[String] = []
+    var index = -1
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         mvc?.urlStr = self.urlStr
         mvc?.qArr = self.qArr
         mvc?.titleDesc = self.titleDesc
+        mvc?.scoreArr = self.scoreArr
         presentR(mvc!)
     }
     
@@ -31,6 +34,8 @@ class FinishedVC: UIViewController {
         super.viewDidLoad()
         let ratio:Double = Double(correctNum) / Double(totalNum)
         let percent:String = (100 * ratio).rounded(toPlaces: 1).clean
+        print(index)
+        scoreArr[index] = "\(correctNum)/\(totalNum) = \(percent)%"
         grade.text = "\(correctNum)/\(totalNum) = \(percent)%"
         grade.layer.borderWidth = 4
         grade.layer.cornerRadius = 5

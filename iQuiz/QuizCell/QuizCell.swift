@@ -12,6 +12,13 @@ class QuizCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var desLabel: UILabel!
+    @IBOutlet weak var score: UILabel! {
+        didSet {
+            score.layer.cornerRadius = score.frame.width / 2
+            score.layer.masksToBounds = true
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +27,6 @@ class QuizCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

@@ -29,7 +29,7 @@ class QuestionVC: UIViewController {
     var qIndex: Int = 0
     var urlStr = ""
     var selectedAns: String = ""
-    let path = Bundle.main.path(forResource: "data", ofType: "json")
+    var scoreArr:[String] = []
     
     var qArr: [[[String]]] = []
     var titleDesc: [[String]] = []
@@ -42,6 +42,7 @@ class QuestionVC: UIViewController {
         mvc?.urlStr = self.urlStr
         mvc?.qArr = self.qArr
         mvc?.titleDesc = self.titleDesc
+        mvc?.scoreArr = self.scoreArr
         self.presentR(mvc!)
     }
 
@@ -60,6 +61,7 @@ class QuestionVC: UIViewController {
             avc?.qArr = self.qArr
             avc?.urlStr = self.urlStr
             avc?.titleDesc = self.titleDesc
+            avc?.scoreArr = self.scoreArr
             self.presentL(avc!)
         } else {
             let alert = UIAlertController(title: "Please select an answer and submit first!", message: "", preferredStyle: .alert)

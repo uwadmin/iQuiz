@@ -24,11 +24,13 @@ class AnswerVC: UIViewController {
     var correctAns = ""
     var correctNum: Int = 0
     var urlStr = ""
+    var scoreArr:[String] = []
 
 
     @IBAction func exitToMain(_ sender: Any) {
         let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
         mvc?.urlStr = self.urlStr
+        mvc?.scoreArr = self.scoreArr
         self.presentR(mvc!)
     }
 
@@ -40,6 +42,8 @@ class AnswerVC: UIViewController {
             fvc?.urlStr = self.urlStr
             fvc?.qArr = self.qArr
             fvc?.titleDesc = self.titleDesc
+            fvc?.index = self.index
+            fvc?.scoreArr = self.scoreArr
             self.presentL(fvc!)
         } else {
             let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
@@ -51,6 +55,7 @@ class AnswerVC: UIViewController {
             qvc?.urlStr = self.urlStr
             qvc?.titleDesc = self.titleDesc
             qvc?.qArr = self.qArr
+            qvc?.scoreArr = self.scoreArr
             self.presentL(qvc!)
         }
     }

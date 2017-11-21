@@ -8,12 +8,13 @@
 
 import UIKit
 
-class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     var quizzes = [Quiz]()
     var titleDesc: [[String]] = []
     var urlChanged = false
+    var scoreArr: [String] = []
     var urlStr = "https://tednewardsandbox.site44.com/questions.json"
     var qArr: [[[String]]] = []
     var defaultTitleDesc: [[String]] = [["Science!", "Because SCIENCE!"], ["Marvel Super Heroes", "Avengers, Assemble!"], ["Mathematics", "Did you pass the third grade?"]]
@@ -31,18 +32,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         ]
     ]
 
-
-    @IBAction func deleteFile(_ sender: Any) {
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileURL = dir.appendingPathComponent("data.json")
-            do {
-                try FileManager.default.removeItem(at: fileURL)
-            } catch let error as NSError {
-                print("Error: \(error.domain)")
-            }
-        }
-    }
-
     struct QuizJSON: Codable {
         var title: String
         var desc: String
@@ -57,12 +46,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func loadData() {
         var data = Data()
-        
+
         func readJson(_ urlStr: String) -> Data {
             urlChanged ? fetch() : loadLocal()
             return data
         }
-        
+
         func loadLocal() {
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent("data.json")
@@ -82,6 +71,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
 
+        func resetScores() {
+            scoreArr = []
+            for _ in titleDesc {
+                scoreArr.append("No Score")
+            }
+        }
 
         if (qArr.count == 0 || urlChanged) {
             let decoder = JSONDecoder()
@@ -104,6 +99,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     qArr.append(catArr)
                     titleDesc.append(titleArr)
                 }
+                resetScores()
             } catch {
                 loadLocal()
                 print("URL not correct", error)
@@ -111,16 +107,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
 
         urlChanged = false
-        
+
         func fetch() {
-            if (valid(urlStr)) {
-                guard let url = URL(string: urlStr) else { fatalError("url not found") }
-                do {
-                    data = try Data(contentsOf: url)
-                    save(data)
-                } catch {
-                    print("URL not found!", error)
-                }
+            guard let url = URL(string: urlStr) else { fatalError("url not found") }
+            do {
+                data = try Data(contentsOf: url)
+                save(data)
+                saveURL()
+            } catch {
+                print("URL not found!", error)
             }
         }
 
@@ -139,27 +134,51 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-    }
 
-    func valid(_ urlString: String?) -> Bool {
-        guard let urlString = urlString,
-            let url = URL(string: urlString) else {
-                return false
+        func saveURL() {
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = dir.appendingPathComponent("url.txt")
+                do {
+                    try urlStr.write(to: fileURL, atomically: false, encoding: .utf8)
+                    print("wrote URL")
+                } catch {
+                    print(error)
+                }
+            }
         }
-        return UIApplication.shared.canOpenURL(url)
     }
 
     @IBAction func btnSettingsPressed(_ sender: UIBarButtonItem) {
-        let svc = storyboard?.instantiateViewController(withIdentifier: "svc") as? SettingsVC
-        svc?.modalPresentationStyle = .popover
-        svc?.popoverPresentationController?.barButtonItem = sender
-        self.present(svc!, animated: true) { }
+        let svc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "svc") as! SettingsVC
+        svc.modalPresentationStyle = .popover
+        if let pop = svc.popoverPresentationController {
+            pop.barButtonItem = sender
+            pop.delegate = self
+        }
+        self.present(svc, animated: true) { }
+    }
+
+    @IBAction func btnScoresPressed(_ sender: UIBarButtonItem) {
+        let score = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "score") as! ScoreVC
+        score.modalPresentationStyle = .popover
+        score.scoreArr = self.scoreArr
+        score.titleDesc = self.titleDesc
+        if let pop = score.popoverPresentationController {
+            pop.barButtonItem = sender
+            pop.delegate = self
+        }
+        self.present(score, animated: true) { }
+    }
+
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 
     func loadQuizzes() {
         let scienceImg = UIImage(named: "Science")
         let mathImg = UIImage(named: "Math")
         let marvelImg = UIImage(named: "Marvel")
+        var iconImage: UIImage = scienceImg!
 //
 //        guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
 //            fatalError("Unable to instantiate science")
@@ -171,10 +190,18 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //            fatalError("Unable to instantiate math")
 //        }
         quizzes = []
+        var index = 0
         for ele in titleDesc {
-            guard let quizCell = Quiz(name: ele[0], photo: scienceImg, desc: ele[1]) else {
+            switch ele[0] {
+            case "Science!": iconImage = scienceImg!
+            case "Marvel Super Heroes": iconImage = marvelImg!
+            case "Mathematics": iconImage = mathImg!
+            default: break
+            }
+            guard let quizCell = Quiz(name: ele[0], photo: iconImage, desc: ele[1], score: scoreArr[index].components(separatedBy: " ").first!) else {
                 fatalError("Unable to instantiate \(ele[0])")
             }
+            index += 1
             quizzes += [quizCell]
         }
 //        quizzes += [science, marvel, math]
@@ -201,6 +228,14 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = quiz.name
         cell.iconImage.image = quiz.photo
         cell.desLabel.text = quiz.desc
+        cell.score.text = quiz.score
+
+        if cell.score.text == "No" {
+            cell.score.isHidden = true
+        } else {
+            cell.score.isHidden = false
+        }
+
         return cell
     }
 
@@ -209,13 +244,27 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         qvc?.index = indexPath.row
         qvc?.urlStr = self.urlStr
         qvc?.qArr = self.qArr
+        qvc?.scoreArr = self.scoreArr
         qvc?.titleDesc = self.titleDesc
         self.presentL(qvc!)
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
-        urlChanged = true
+        var storedURL = ""
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent("url.txt")
+            do {
+                storedURL = try String(contentsOf: fileURL, encoding: .utf8)
+            } catch {
+                storedURL = urlStr
+            }
+        }
+        if (urlStr == storedURL) {
+            urlChanged = true
+            print("changed")
+        }
         loadData()
+        loadQuizzes()
         tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             refreshControl.endRefreshing()

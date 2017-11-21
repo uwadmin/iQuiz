@@ -12,14 +12,16 @@ class Quiz {
     var name: String
     var photo: UIImage?
     var desc: String
+    var score: String
     
-    init?(name: String, photo: UIImage?, desc: String) {
+    init?(name: String, photo: UIImage?, desc: String, score: String) {
         if name.isEmpty || desc.isEmpty  {
             return nil
         }
         self.name = name
         self.photo = photo
         self.desc = desc
+        self.score = score
     }
 }
 

@@ -13,6 +13,19 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var input: UITextField!
 
     var urlStr = ""
+    
+    @IBAction func deleteFile(_ sender: Any) {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent("data.json")
+            let urlURL = dir.appendingPathComponent("url.txt")
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+                try FileManager.default.removeItem(at: urlURL)
+            } catch let error as NSError {
+                print("Error: \(error.domain)")
+            }
+        }
+    }
 
     @IBAction func github(_ sender: Any) {
         input.text = "https://cdn.rawgit.com/uwadmin/c3b4021fa726c8ac7a318a0901901730/raw/2be68cc1e49cf6f12305536e84e44308fddad5d6/test.json"
