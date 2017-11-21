@@ -99,11 +99,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPo
                     qArr.append(catArr)
                     titleDesc.append(titleArr)
                 }
-                resetScores()
             } catch {
                 loadLocal()
                 print("URL not correct", error)
             }
+            resetScores()
         }
 
         urlChanged = false
@@ -240,13 +240,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
-        qvc?.index = indexPath.row
-        qvc?.urlStr = self.urlStr
-        qvc?.qArr = self.qArr
-        qvc?.scoreArr = self.scoreArr
-        qvc?.titleDesc = self.titleDesc
-        self.presentL(qvc!)
+        let qvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "qvc") as! QuestionVC
+        qvc.index = indexPath.row
+        qvc.urlStr = self.urlStr
+        qvc.qArr = self.qArr
+        qvc.scoreArr = self.scoreArr
+        qvc.titleDesc = self.titleDesc
+        self.presentL(qvc)
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {

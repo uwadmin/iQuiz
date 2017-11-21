@@ -28,35 +28,35 @@ class AnswerVC: UIViewController {
 
 
     @IBAction func exitToMain(_ sender: Any) {
-        let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
-        mvc?.urlStr = self.urlStr
-        mvc?.scoreArr = self.scoreArr
-        self.presentR(mvc!)
+        let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mvc") as! MainVC
+        mvc.urlStr = self.urlStr
+        mvc.scoreArr = self.scoreArr
+        self.presentR(mvc)
     }
 
     @IBAction func goToNext(_ sender: Any) {
         if (qIndex + 1 == totalNum) {
-            let fvc = storyboard?.instantiateViewController(withIdentifier: "fvc") as? FinishedVC
-            fvc?.correctNum = self.correctNum
-            fvc?.totalNum = self.totalNum
-            fvc?.urlStr = self.urlStr
-            fvc?.qArr = self.qArr
-            fvc?.titleDesc = self.titleDesc
-            fvc?.index = self.index
-            fvc?.scoreArr = self.scoreArr
-            self.presentL(fvc!)
+            let fvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "fvc") as! FinishedVC
+            fvc.correctNum = self.correctNum
+            fvc.totalNum = self.totalNum
+            fvc.urlStr = self.urlStr
+            fvc.qArr = self.qArr
+            fvc.titleDesc = self.titleDesc
+            fvc.index = self.index
+            fvc.scoreArr = self.scoreArr
+            self.presentL(fvc)
         } else {
-            let qvc = storyboard?.instantiateViewController(withIdentifier: "qvc") as? QuestionVC
+            let qvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "qvc") as! QuestionVC
 //            let qvc = presentingViewController as? QuestionVC
-            qvc?.index = self.index
-            qvc?.qIndex = self.qIndex + 1
-            qvc?.correctNum = self.correctNum
-            qvc?.qRand = self.qRand
-            qvc?.urlStr = self.urlStr
-            qvc?.titleDesc = self.titleDesc
-            qvc?.qArr = self.qArr
-            qvc?.scoreArr = self.scoreArr
-            self.presentL(qvc!)
+            qvc.index = self.index
+            qvc.qIndex = self.qIndex + 1
+            qvc.correctNum = self.correctNum
+            qvc.qRand = self.qRand
+            qvc.urlStr = self.urlStr
+            qvc.titleDesc = self.titleDesc
+            qvc.qArr = self.qArr
+            qvc.scoreArr = self.scoreArr
+            self.presentL(qvc)
         }
     }
 

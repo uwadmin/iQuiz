@@ -22,12 +22,12 @@ class FinishedVC: UIViewController {
     var index = -1
 
     @IBAction func exitToMain(_ sender: Any) {
-        let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
-        mvc?.urlStr = self.urlStr
-        mvc?.qArr = self.qArr
-        mvc?.titleDesc = self.titleDesc
-        mvc?.scoreArr = self.scoreArr
-        presentR(mvc!)
+        let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mvc") as! MainVC
+        mvc.urlStr = self.urlStr
+        mvc.qArr = self.qArr
+        mvc.titleDesc = self.titleDesc
+        mvc.scoreArr = self.scoreArr
+        presentR(mvc)
     }
     
     override func viewDidLoad() {

@@ -38,31 +38,31 @@ class QuestionVC: UIViewController {
     var qRand: [Int] = []
 
     @IBAction func exitToMain(_ sender: Any) {
-        let mvc = storyboard?.instantiateViewController(withIdentifier: "mvc") as? MainVC
-        mvc?.urlStr = self.urlStr
-        mvc?.qArr = self.qArr
-        mvc?.titleDesc = self.titleDesc
-        mvc?.scoreArr = self.scoreArr
-        self.presentR(mvc!)
+        let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mvc") as! MainVC
+        mvc.urlStr = self.urlStr
+        mvc.qArr = self.qArr
+        mvc.titleDesc = self.titleDesc
+        mvc.scoreArr = self.scoreArr
+        self.presentR(mvc)
     }
 
     @IBAction func goToNext(_ sender: Any) {
         if (submited) {
             submited = false
             selected = false
-            let avc = storyboard?.instantiateViewController(withIdentifier: "avc") as? AnswerVC
-            avc?.index = self.index
-            avc?.qIndex = self.qIndex
-            avc?.totalNum = self.qArr[index].count
-            avc?.correct = self.correct
-            avc?.correctAns = self.qArr[index][qRand[qIndex]][1]
-            avc?.correctNum = self.correctNum
-            avc?.qRand = self.qRand
-            avc?.qArr = self.qArr
-            avc?.urlStr = self.urlStr
-            avc?.titleDesc = self.titleDesc
-            avc?.scoreArr = self.scoreArr
-            self.presentL(avc!)
+            let avc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "avc") as! AnswerVC
+            avc.index = self.index
+            avc.qIndex = self.qIndex
+            avc.totalNum = self.qArr[index].count
+            avc.correct = self.correct
+            avc.correctAns = self.qArr[index][qRand[qIndex]][1]
+            avc.correctNum = self.correctNum
+            avc.qRand = self.qRand
+            avc.qArr = self.qArr
+            avc.urlStr = self.urlStr
+            avc.titleDesc = self.titleDesc
+            avc.scoreArr = self.scoreArr
+            self.presentL(avc)
         } else {
             let alert = UIAlertController(title: "Please select an answer and submit first!", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
