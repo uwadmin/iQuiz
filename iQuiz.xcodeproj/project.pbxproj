@@ -14,6 +14,7 @@
 		F007DF141FB6F747005B8B03 /* MutableCollection+Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007DF131FB6F747005B8B03 /* MutableCollection+Shuffle.swift */; };
 		F007DF181FB74214005B8B03 /* Double+Rounded+Clean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007DF171FB74214005B8B03 /* Double+Rounded+Clean.swift */; };
 		F0586A4D1FC3E495008E8049 /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0586A4C1FC3E495008E8049 /* ScoreVC.swift */; };
+		F0586A521FC44493008E8049 /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0586A511FC44493008E8049 /* ScoreCell.swift */; };
 		F06E26F71FAFE0680070CC05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E26F61FAFE0680070CC05 /* AppDelegate.swift */; };
 		F06E26FC1FAFE0680070CC05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F06E26FA1FAFE0680070CC05 /* Main.storyboard */; };
 		F06E26FE1FAFE0680070CC05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F06E26FD1FAFE0680070CC05 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		F007DF131FB6F747005B8B03 /* MutableCollection+Shuffle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MutableCollection+Shuffle.swift"; sourceTree = "<group>"; };
 		F007DF171FB74214005B8B03 /* Double+Rounded+Clean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded+Clean.swift"; sourceTree = "<group>"; };
 		F0586A4C1FC3E495008E8049 /* ScoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
+		F0586A511FC44493008E8049 /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
 		F06E26F31FAFE0680070CC05 /* iQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F06E26F61FAFE0680070CC05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F06E26FB1FAFE0680070CC05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +70,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F0586A531FC444A5008E8049 /* ScoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				F0586A511FC44493008E8049 /* ScoreCell.swift */,
+			);
+			path = ScoreCell;
+			sourceTree = "<group>";
+		};
 		F06E26EA1FAFE0680070CC05 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +106,7 @@
 				F007DF0F1FB6E441005B8B03 /* AnswerVC.swift */,
 				F09A0D7A1FB004A700E96A2F /* MainVC.swift */,
 				F007DF0C1FB6A667005B8B03 /* Extensions */,
+				F0586A531FC444A5008E8049 /* ScoreCell */,
 				F09219591FB6906200A73022 /* QuizCell */,
 				F06E26FD1FAFE0680070CC05 /* Assets.xcassets */,
 				F06E26FF1FAFE0680070CC05 /* LaunchScreen.storyboard */,
@@ -189,6 +200,7 @@
 				F007DF0E1FB6A6AA005B8B03 /* UIViewController+Swipe.swift in Sources */,
 				F09F14B51FB94D3100E19F01 /* UIlable+Padding.swift in Sources */,
 				F092195B1FB692F000A73022 /* QuestionVC.swift in Sources */,
+				F0586A521FC44493008E8049 /* ScoreCell.swift in Sources */,
 				F007DF101FB6E441005B8B03 /* AnswerVC.swift in Sources */,
 				F0586A4D1FC3E495008E8049 /* ScoreVC.swift in Sources */,
 				F00110361FBBFBD600E8C9E7 /* SettingsVC.swift in Sources */,

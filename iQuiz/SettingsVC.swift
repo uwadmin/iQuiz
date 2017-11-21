@@ -64,7 +64,21 @@ class SettingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        for button in buttons {
+            button.layer.cornerRadius = 5
+            button.layer.borderWidth = 1
+            button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+            button.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
+            button.layer.shadowOpacity = 0.5
+            button.layer.shadowRadius = 0.0
+            button.layer.masksToBounds = false
+            button.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleLabel?.lineBreakMode = .byClipping
+            button.titleLabel?.numberOfLines = 1
+            button.titleLabel?.minimumScaleFactor = 0.1
+            button.titleLabel?.baselineAdjustment = .alignCenters
+        }
         // Do any additional setup after loading the view.
     }
 
