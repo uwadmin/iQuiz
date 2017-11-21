@@ -11,7 +11,7 @@ import UIKit
 class ScoreVC: UIViewController {
     
     @IBOutlet weak var label: UILabel!
-    
+
     var scoreArr:[String] = []
     var titleDesc:[[String]] = []
 

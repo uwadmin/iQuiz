@@ -11,7 +11,8 @@ import UIKit
 class SettingsVC: UIViewController {
 
     @IBOutlet weak var input: UITextField!
-
+    @IBOutlet var buttons: [UIButton]!
+    
     var urlStr = ""
     
     @IBAction func deleteFile(_ sender: Any) {
@@ -28,15 +29,11 @@ class SettingsVC: UIViewController {
     }
 
     @IBAction func github(_ sender: Any) {
-        input.text = "https://cdn.rawgit.com/uwadmin/c3b4021fa726c8ac7a318a0901901730/raw/2be68cc1e49cf6f12305536e84e44308fddad5d6/test.json"
+        input.text = "https://cdn.rawgit.com/uwadmin/1a1f0d906ee87fee477310c95ebd2683/raw/5ea55fc05ecbe661e147ebb21c16b016e8b7930f/long.json"
     }
 
     @IBAction func ted(_ sender: Any) {
         input.text = "https://tednewardsandbox.site44.com/questions.json"
-    }
-
-    @IBAction func dismiss(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func updateURL(_ sender: UIButton) {

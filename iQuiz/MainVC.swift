@@ -178,17 +178,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPo
         let scienceImg = UIImage(named: "Science")
         let mathImg = UIImage(named: "Math")
         let marvelImg = UIImage(named: "Marvel")
-        var iconImage: UIImage = scienceImg!
-//
-//        guard let science = Quiz(name: "Science", photo: scienceImg, desc: "Questions about science") else {
-//            fatalError("Unable to instantiate science")
-//        }
-//        guard let marvel = Quiz(name: "Marvel Super Heroes", photo: marvelImg, desc: "Questions about marvel super heroes") else {
-//            fatalError("Unable to instantiate marvel")
-//        }
-//        guard let math = Quiz(name: "Mathematics", photo: mathImg, desc: "Questions about math") else {
-//            fatalError("Unable to instantiate math")
-//        }
+        var iconImage = UIImage(named: "info")
         quizzes = []
         var index = 0
         for ele in titleDesc {
